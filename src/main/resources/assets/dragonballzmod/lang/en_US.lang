@@ -1,0 +1,25 @@
+itemGroup.dragonBallZModTab=Dragon Ball Z Mod
+
+tile.blockNamekianGrass.name=Namekian Grass Block
+tile.blockNamekianSoil.name=Namekian Soil
+tile.blockNamekianMarble.name=Namekian Marble
+tile.blockNamekianStone.name=Namekian Stone
+tile.blockNamekianCoalOre.name=Namekian Coal Ore
+tile.blockNamekianIronOre.name=Namekian Iron Ore
+tile.blockDoomDiamondOre.name=Doom Diamond Ore
+tile.blockDoomDiamondBlock.name=Doom Diamond Block
+tile.blockNamekianSand.name=Namekian Sand
+
+tile.blockDragonBall1.name=1 Star Dragon Ball
+tile.blockDragonBall2.name=2 Star Dragon Ball
+tile.blockDragonBall3.name=3 Star Dragon Ball
+tile.blockDragonBall4.name=4 Star Dragon Ball
+tile.blockDragonBall5.name=5 Star Dragon Ball
+tile.blockDragonBall6.name=6 Star Dragon Ball
+tile.blockDragonBall7.name=7 Star Dragon Ball
+
+item.itemDoomDiamond.name=Doom Diamond
+
+item.flyingNimbus.name=Flying Nimbus
+
+entity.dragonBallZMod.FlyingNimbus.name=Flying Nimbus
