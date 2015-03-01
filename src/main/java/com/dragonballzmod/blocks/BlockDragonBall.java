@@ -1,10 +1,8 @@
 package com.dragonballzmod.blocks;
 
 import com.dragonballzmod.DragonBallZMod;
-import com.dragonballzmod.blocks.tileentity.TileEntityBase;
 import com.dragonballzmod.blocks.tileentity.TileEntityDragonBall;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -14,20 +12,13 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.server.S0EPacketSpawnObject;
-import net.minecraft.network.play.server.S0FPacketSpawnMob;
-import net.minecraft.network.play.server.S1FPacketSetExperience;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenEnd;
-import net.minecraft.world.chunk.Chunk;
 
 import java.util.Random;
 
@@ -140,7 +131,7 @@ public class BlockDragonBall extends BlockContainer {
      * note: This checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
-        return par3 >= 255 ? false : par1World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4);
+        return par3 >= 255 ? false : World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4);
     }
 
     public void onBlockPlacedBy(World par1World, int x, int y, int z, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack) {

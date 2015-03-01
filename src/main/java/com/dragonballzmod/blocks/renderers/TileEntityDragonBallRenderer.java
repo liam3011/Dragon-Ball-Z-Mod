@@ -1,6 +1,5 @@
 package com.dragonballzmod.blocks.renderers;
 
-import com.dragonballzmod.blocks.tileentity.TileEntityBase;
 import com.dragonballzmod.blocks.tileentity.TileEntityDragonBall;
 import com.dragonballzmod.model.parts.dragonBallModel;
 import cpw.mods.fml.client.FMLClientHandler;

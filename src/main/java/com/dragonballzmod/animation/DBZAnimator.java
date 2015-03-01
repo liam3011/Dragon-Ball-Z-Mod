@@ -7,7 +7,6 @@ import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -397,7 +396,7 @@ public class DBZAnimator {
             poseFile = new JSONObject(json);
             poseData = poseFile.getJSONObject("poses");
            // NarutoMod.LOGGER.info(poseFile.getNames("poses"));
-            String[] poseNames = poseFile.getNames(poseData);
+            String[] poseNames = JSONObject.getNames(poseData);
 
             Pose[] oldPoses = poseArray;
 
@@ -418,7 +417,7 @@ public class DBZAnimator {
                 JSONObject poseInfo = poseData.getJSONObject(currentPoseName);
 
                 JSONObject locData = poseInfo.getJSONObject("locData");
-                String[] positionNames = poseFile.getNames(locData);
+                String[] positionNames = JSONObject.getNames(locData);
 
                 PartData[] partArray = new PartData[positionNames.length];
 

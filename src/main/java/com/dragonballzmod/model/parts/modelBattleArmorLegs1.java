@@ -1,7 +1,6 @@
 package com.dragonballzmod.model.parts;
 
 import com.dragonballzmod.player.ModelDBZBiped;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 

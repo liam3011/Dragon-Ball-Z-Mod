@@ -1,13 +1,12 @@
 package com.dragonballzmod.client;
 
-import com.dragonballzmod.DragonBallZMod;
+import com.dragonballzmod.animation.DBZAnimator;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import org.lwjgl.opengl.GL11;
@@ -26,7 +25,7 @@ public class PlayerRenderTickEvent {
 
             EntityClientPlayerMP playerMP = FMLClientHandler.instance().getClient().thePlayer;
 
-            DragonBallZMod.entityAnimator.updateClient(playerMP, DragonBallZMod.entityAnimator.playerPoses);
+            DBZAnimator.updateClient(playerMP, DBZAnimator.playerPoses);
 
             // TODO finish this code so it works with the morph mod
             // also make sure that if the first person is set to false in the config it igores this completely

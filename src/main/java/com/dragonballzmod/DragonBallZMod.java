@@ -51,26 +51,20 @@ public class DragonBallZMod {
 
         entityAnimator = new DBZAnimator();
 
-        entityAnimator.playerPoses = new Pose[1];
-        entityAnimator.playerPoses[0] = new Pose("default");
+        DBZAnimator.playerPoses = new Pose[1];
+        DBZAnimator.playerPoses[0] = new Pose("default");
         
         MinecraftForge.EVENT_BUS.register(new EventHook());
         DragonBallZBlocks.addBlocks();
         DragonBallZItems.addItems();
         DragonBallZEntitys.addEntitys(this);
 
-        GameRegistry.addRecipe(new ItemStack(DragonBallZBlocks.blockDoomDiamondBlock), new Object[]
-                {
-                        "XXX",
-                        "XXX",
-                        "XXX",
-                        'X', DragonBallZItems.itemDoomDiamond
-                });
+        GameRegistry.addRecipe(new ItemStack(DragonBallZBlocks.blockDoomDiamondBlock), "XXX",
+                "XXX",
+                "XXX",
+                'X', DragonBallZItems.itemDoomDiamond);
 
-        GameRegistry.addShapelessRecipe(new ItemStack(DragonBallZItems.itemDoomDiamond, 9), new Object[]
-                {
-                        DragonBallZBlocks.blockDoomDiamondBlock
-                });
+        GameRegistry.addShapelessRecipe(new ItemStack(DragonBallZItems.itemDoomDiamond, 9), DragonBallZBlocks.blockDoomDiamondBlock);
 
         proxy.registerEveryThing();
         proxy.registerCustomBlocks();

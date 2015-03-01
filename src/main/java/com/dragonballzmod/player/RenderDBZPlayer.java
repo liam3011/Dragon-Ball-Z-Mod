@@ -1,6 +1,6 @@
 package com.dragonballzmod.player;
 
-import com.dragonballzmod.DragonBallZMod;
+import com.dragonballzmod.animation.DBZAnimator;
 import com.dragonballzmod.playeraccessories.ModelNamek;
 import com.dragonballzmod.playeraccessories.ModeltailModel;
 import com.mojang.authlib.GameProfile;
@@ -36,9 +36,6 @@ import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-
-
-import java.util.UUID;
 
 @SideOnly(Side.CLIENT)
 public class RenderDBZPlayer extends RenderPlayer {
@@ -237,7 +234,7 @@ public class RenderDBZPlayer extends RenderPlayer {
         EntityClientPlayerMP playerMP = FMLClientHandler.instance().getClient().thePlayer;
 
         if (p_76986_1_ != playerMP) {
-            DragonBallZMod.entityAnimator.updateEntity(dw, playerMP, DragonBallZMod.entityAnimator.playerPoses);
+            DBZAnimator.updateEntity(dw, playerMP, DBZAnimator.playerPoses);
         }
 
 
@@ -253,7 +250,7 @@ public class RenderDBZPlayer extends RenderPlayer {
             d3 -= 0.125D;
         }
 
-        this.doFinalRender((EntityLivingBase) p_76986_1_, p_76986_2_, d3, p_76986_6_, p_76986_8_, p_76986_9_);
+        this.doFinalRender(p_76986_1_, p_76986_2_, d3, p_76986_6_, p_76986_8_, p_76986_9_);
         this.modelArmorChestplate.aimedBow = this.modelArmor.aimedBow = this.modelBipedMain.aimedBow = false;
         this.modelArmorChestplate.isSprinting = this.modelArmor.isSprinting = this.modelBipedMain.isSprinting = false;
         this.modelArmorChestplate.isSneak = this.modelArmor.isSneak = this.modelBipedMain.isSneak = false;
@@ -272,7 +269,6 @@ public class RenderDBZPlayer extends RenderPlayer {
         float f3;
 
         for (f3 = p_77034_2_ - p_77034_1_; f3 < -180.0F; f3 += 360.0F) {
-            ;
         }
 
         while (f3 >= 180.0F) {
@@ -578,7 +574,7 @@ public class RenderDBZPlayer extends RenderPlayer {
                     if (nbttagcompound.hasKey("SkullOwner", 10)) {
                         gameprofile = NBTUtil.func_152459_a(nbttagcompound.getCompoundTag("SkullOwner"));
                     } else if (nbttagcompound.hasKey("SkullOwner", 8) && !StringUtils.isNullOrEmpty(nbttagcompound.getString("SkullOwner"))) {
-                        gameprofile = new GameProfile((UUID) null, nbttagcompound.getString("SkullOwner"));
+                        gameprofile = new GameProfile(null, nbttagcompound.getString("SkullOwner"));
                     }
                 }
 

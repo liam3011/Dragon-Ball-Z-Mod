@@ -1,7 +1,7 @@
 package com.dragonballzmod.player;
 
-import com.dragonballzmod.DragonBallZMod;
 import com.dragonballzmod.animation.AnimModelRenderer;
+import com.dragonballzmod.animation.DBZAnimator;
 import com.dragonballzmod.animation.modelparts.ModelRetexturedBoxSharpBend;
 import com.dragonballzmod.client.PlayerRenderTickEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -11,7 +11,6 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
-
 
 import java.util.ArrayList;
 
@@ -597,7 +596,7 @@ public class ModelDBZBiped extends ModelBiped {
          }*/
 
         if (!this.animationID.equals("default") || !this.animationlastID.equals("default")) {
-            DragonBallZMod.entityAnimator.animate(this.animationID, this.animationlastID, this.animationTick, this.animatedParts, DragonBallZMod.entityAnimator.playerPoses);
+            DBZAnimator.animate(this.animationID, this.animationlastID, this.animationTick, this.animatedParts, DBZAnimator.playerPoses);
         }
 
         // Arms

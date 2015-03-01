@@ -42,12 +42,12 @@ public class ItemRendererDragonBall implements IItemRenderer {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.95F);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDepthMask(true);
-        if (type == type.ENTITY) {
+        if (type == ItemRenderType.ENTITY) {
             GL11.glTranslatef(0.0F, -1.3F, 0.0F);
-        } else if (type == type.INVENTORY) {
+        } else if (type == ItemRenderType.INVENTORY) {
             GL11.glTranslatef(0.0F, -2.4F, 0.0F);
             GL11.glScalef(1.9F, 1.9F, 1.9F);
-        } else if (type == type.EQUIPPED_FIRST_PERSON || type == type.EQUIPPED) {
+        } else if (type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.EQUIPPED) {
             GL11.glTranslatef(0.70F, -1.9F, -0.70F);
             GL11.glScalef(1.4F, 1.4F, 1.4F);
         }

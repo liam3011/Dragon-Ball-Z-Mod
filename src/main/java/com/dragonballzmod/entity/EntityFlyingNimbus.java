@@ -1,10 +1,10 @@
 package com.dragonballzmod.entity;
 
-import com.dragonballzmod.particles.EntityColouredSmokeFX;
+import com.dragonballzmod.client.Particle;
+import com.dragonballzmod.client.Particles;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -223,7 +223,8 @@ public class EntityFlyingNimbus extends Entity {
                 double particleY = (Math.random()) * 0.5 - 0.2F;
                 double particleZ = Math.random() * 1.5 - 0.75;
                 double multi = 10D;
-                Minecraft.getMinecraft().effectRenderer.addEffect(new EntityColouredSmokeFX(this.worldObj, posX + particleX - motionX * multi, posY + particleY - motionY * multi, posZ + particleZ - motionZ * multi, 0, 0, 0, 1F, 1F, 0.0F));
+                Particles.addParticle(Particle.COLOURED_SMOKE, this.worldObj, posX + particleX - motionX * multi, posY + particleY - motionY * multi, posZ + particleZ - motionZ * multi, 0, 0, 0, 1F, 1F, 0.0F);
+
             }
 
             for (int i = 0; i < 6; i++) {
@@ -231,7 +232,7 @@ public class EntityFlyingNimbus extends Entity {
                 double particleY = (Math.random()) * 0.5 - 0.2F;
                 double particleZ = Math.random() * 1.5 - 0.75;
                 double multi = 10D;
-                Minecraft.getMinecraft().effectRenderer.addEffect(new EntityColouredSmokeFX(this.worldObj, posX + particleX - motionX * multi, posY + particleY - motionY * multi, posZ + particleZ - motionZ * multi, 0, 0, 0, 1F, 1F - (float) (Math.random() * 0.2F), 0.0F));
+                Particles.addParticle(Particle.COLOURED_SMOKE, this.worldObj, posX + particleX - motionX * multi, posY + particleY - motionY * multi, posZ + particleZ - motionZ * multi, 0, 0, 0, 1F, 1F - (float) (Math.random() * 0.2F), 0.0F);
             }
         }
 
