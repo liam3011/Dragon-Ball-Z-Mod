@@ -7,8 +7,6 @@ import com.dragonballzmod.blocks.renderers.TileEntityDragonBallRenderer;
 import com.dragonballzmod.blocks.tileentity.TileEntityDragonBall;
 import com.dragonballzmod.common.CommonProxy;
 import com.dragonballzmod.entity.EntityFlyingNimbus;
-import com.dragonballzmod.entity.renderers.RenderHarmlessLightningBolt;
-import com.dragonballzmod.entity.weather.EntityHarmlessLightningBolt;
 import com.dragonballzmod.player.RenderDBZPlayer;
 import com.dragonballzmod.render.RenderFlyingNimbus;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -22,7 +20,6 @@ public class ClientProxy extends CommonProxy {
     public void registerEveryThing() {
         RenderingRegistry.registerEntityRenderingHandler(EntityFlyingNimbus.class, new RenderFlyingNimbus());
         RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderDBZPlayer());
-        RenderingRegistry.registerEntityRenderingHandler(EntityHarmlessLightningBolt.class, new RenderHarmlessLightningBolt());
         MinecraftForge.EVENT_BUS.register(new PlayerRenderTickEvent());
     }
 

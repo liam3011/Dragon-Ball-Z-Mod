@@ -2,7 +2,6 @@ package com.dragonballzmod.blocks;
 
 import com.dragonballzmod.DragonBallZMod;
 import com.dragonballzmod.blocks.tileentity.TileEntityDragonBall;
-import com.dragonballzmod.entity.weather.EntityHarmlessLightningBolt;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,9 +13,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.server.S0EPacketSpawnObject;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
@@ -75,6 +72,7 @@ public class BlockDragonBall extends BlockContainer {
         // ((EntityPlayerMP) par5EntityPlayer).playerNetServerHandler.sendPacket(new S0EPacketSpawnObject(new EntityLightningBolt(par1World, par2, par3, par4), 0));
         // par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, par2, par3, par4));
         par1World.scheduleBlockUpdate(par2, par3, par4, this, 1);
+        ballStage = 0;
 
         // if(par1World.getBiomeGenForCoords(0,0) != BiomeGenBase.sky){
         //     BiomeGenBase.getBiome(16).temperature = 0.0f;
@@ -93,11 +91,11 @@ public class BlockDragonBall extends BlockContainer {
     public void updateTick(World par1World, int x, int y, int z, Random par5Random) {
         ballStage++;
         if(ballStage <= 2){
-            par1World.addWeatherEffect(new EntityHarmlessLightningBolt(par1World, x,y,z));
+            par1World.addWeatherEffect(new EntityLightningBolt(par1World, x,y,z));
             par1World.scheduleBlockUpdate(x,y,z, this, 40);
         }
         else if(ballStage == 3){
-            par1World.addWeatherEffect(new EntityHarmlessLightningBolt(par1World, x,y,z));
+            par1World.addWeatherEffect(new EntityLightningBolt(par1World, x,y,z));
             EntityCaveSpider spider = new EntityCaveSpider(par1World);
             spider.setPosition(x,y + 1,z);
             par1World.spawnEntityInWorld(spider);
