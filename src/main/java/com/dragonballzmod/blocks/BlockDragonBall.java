@@ -2,6 +2,7 @@ package com.dragonballzmod.blocks;
 
 import com.dragonballzmod.DragonBallZMod;
 import com.dragonballzmod.blocks.tileentity.TileEntityDragonBall;
+import com.dragonballzmod.entity.weather.EntityHarmlessLightningBolt;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -11,8 +12,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.server.S0EPacketSpawnObject;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
@@ -27,6 +31,8 @@ public class BlockDragonBall extends BlockContainer {
     private IIcon[] blockIcons;
 
     private int stars = 0;
+
+    private int ballStage = 0;
 
     public BlockDragonBall(int stars) {
         super(Material.plants);
@@ -56,43 +62,55 @@ public class BlockDragonBall extends BlockContainer {
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         Side side = FMLCommonHandler.instance().getSide();
 
-      //  par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, par2, par3, par4));
+        //  par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, par2, par3, par4));
 
-      //  if(side == Side.CLIENT) {
-            //    par5EntityPlayer.addChatMessage(new ChatComponentText("Eternal dragon, by your name I summon you forth! SHENRON!!!"));
+        //  if(side == Side.CLIENT) {
+        //    par5EntityPlayer.addChatMessage(new ChatComponentText("Eternal dragon, by your name I summon you forth! SHENRON!!!"));
+        if(!par1World.isRemote){
+            par5EntityPlayer.addChatMessage(new ChatComponentText("Eternal dragon, by your name I summon you forth! SHENRON!!!"));
+        }
+        //  par5EntityPlayer.addChatComponentMessage(new ChatComponentText("Eternal dragon, by your name I summon you forth! SHENRON!!!"));
+        // par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, par2, par3, par4));
 
-            if(par1World.isRemote){
-                par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, par2, par3, par4));
-                return true;
-            }
-            par5EntityPlayer.addChatComponentMessage(new ChatComponentText("Eternal dragon, by your name I summon you forth! SHENRON!!!"));
+        // ((EntityPlayerMP) par5EntityPlayer).playerNetServerHandler.sendPacket(new S0EPacketSpawnObject(new EntityLightningBolt(par1World, par2, par3, par4), 0));
+        // par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, par2, par3, par4));
+        par1World.scheduleBlockUpdate(par2, par3, par4, this, 1);
 
-            //  par5EntityPlayer.addChatComponentMessage(new ChatComponentText("Eternal dragon, by your name I summon you forth! SHENRON!!!"));
-            // par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, par2, par3, par4));
-
-            // ((EntityPlayerMP) par5EntityPlayer).playerNetServerHandler.sendPacket(new S0EPacketSpawnObject(new EntityLightningBolt(par1World, par2, par3, par4), 0));
-            // par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, par2, par3, par4));
-            par1World.scheduleBlockUpdate(par2, par3, par4, this, 20);
-            par1World.scheduleBlockUpdate(par2, par3, par4, this, 40);
-            par1World.scheduleBlockUpdate(par2, par3, par4, this, 60);
-            System.out.println("Something happens");
-
-           // if(par1World.getBiomeGenForCoords(0,0) != BiomeGenBase.sky){
-           //     BiomeGenBase.getBiome(16).temperature = 0.0f;
+        // if(par1World.getBiomeGenForCoords(0,0) != BiomeGenBase.sky){
+        //     BiomeGenBase.getBiome(16).temperature = 0.0f;
 
 
-           // }
-            // event.getPlayer().getWorld().getBiome();
-            // if( event.getPlayer().getWorld().getBiome() != BiomeGenBase.sky){
-            //     event.getPlayer().getWorld().getBiome().temperature = 0.0F;
-            // }
+        // }
+        // event.getPlayer().getWorld().getBiome();
+        // if( event.getPlayer().getWorld().getBiome() != BiomeGenBase.sky){
+        //     event.getPlayer().getWorld().getBiome().temperature = 0.0F;
+        // }
 
 
         return true;
     }
 
     public void updateTick(World par1World, int x, int y, int z, Random par5Random) {
-        par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, x,y + 1,z));
+        ballStage++;
+        if(ballStage <= 2){
+            par1World.addWeatherEffect(new EntityHarmlessLightningBolt(par1World, x,y,z));
+            par1World.scheduleBlockUpdate(x,y,z, this, 40);
+        }
+        else if(ballStage == 3){
+            par1World.addWeatherEffect(new EntityHarmlessLightningBolt(par1World, x,y,z));
+            EntityCaveSpider spider = new EntityCaveSpider(par1World);
+            spider.setPosition(x,y + 1,z);
+            par1World.spawnEntityInWorld(spider);
+        }
+        /**for(Object player: par1World.playerEntities){
+         if(player instanceof EntityPlayerMP){
+         EntityPlayerMP playerMP = (EntityPlayerMP) player;
+         if(playerMP.getDistance(x,y,z) <= 64){
+         System.out.println("SENT PACKET TO " + playerMP.getCommandSenderName());
+         playerMP.playerNetServerHandler.sendPacket(new S0EPacketSpawnObject(new EntityLightningBolt(par1World, x,y + 1,z),1));
+         }
+         }
+         }*/
     }
 
 

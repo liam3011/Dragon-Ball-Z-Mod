@@ -1,4 +1,4 @@
-package com.dragonballzmod.entity;
+package com.dragonballzmod.events;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.EntityLivingBase;
