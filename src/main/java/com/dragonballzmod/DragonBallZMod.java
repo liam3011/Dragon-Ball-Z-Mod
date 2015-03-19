@@ -8,12 +8,23 @@ import com.dragonballzmod.entity.DragonBallZEntitys;
 import com.dragonballzmod.events.EventHook;
 import com.dragonballzmod.help.Reference;
 import com.dragonballzmod.items.DragonBallZItems;
+import com.dragonballzmod.packets.clientbound.ClientAnimationPacket;
+import com.dragonballzmod.packets.clientbound.ClientJutsuPacket;
+import com.dragonballzmod.packets.clientbound.ClientParticleEffectPacket;
+import com.dragonballzmod.packets.clientbound.ClientSoundPacket;
+import com.dragonballzmod.packets.serverbound.ServerAnimationPacket;
+import com.dragonballzmod.packets.serverbound.ServerJutsuPacket;
+import com.dragonballzmod.packets.serverbound.ServerParticleEffectPacket;
+import com.dragonballzmod.packets.serverbound.ServerSoundPacket;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -23,8 +34,11 @@ import net.minecraftforge.common.MinecraftForge;
 
 @Mod(modid = Reference.MODID, version = Reference.VERSION)
 public class DragonBallZMod {
+
     public static final String modid = Reference.MODID;
     public static final String version = Reference.VERSION;
+
+    public static SimpleNetworkWrapper packetNetwork;
 
     //Proxy:
     @SidedProxy(clientSide = "com.dragonballzmod.client.ClientProxy", serverSide = "com.dragonballzmod.common.CommonProxy")
@@ -41,6 +55,9 @@ public class DragonBallZMod {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+
+        this.packetNetwork();
+
         //DragonBallZBlocks.addBlocks();
         //DragonBallZItems.addItems();
         //DragonBallZEntitys.addEntitys(this);
@@ -68,5 +85,20 @@ public class DragonBallZMod {
 
         proxy.registerEveryThing();
         proxy.registerCustomBlocks();
+    }
+
+    private void packetNetwork() {
+        // Stands for Sekwah's Naruto Mod
+        packetNetwork = NetworkRegistry.INSTANCE.newSimpleChannel("SNM");
+        packetNetwork.registerMessage(ClientParticleEffectPacket.class, ClientParticleEffectPacket.class, 0, Side.CLIENT);
+        packetNetwork.registerMessage(ClientJutsuPacket.class, ClientJutsuPacket.class, 1, Side.CLIENT);
+        packetNetwork.registerMessage(ClientSoundPacket.class, ClientSoundPacket.class, 2, Side.CLIENT);
+        packetNetwork.registerMessage(ClientAnimationPacket.class, ClientAnimationPacket.class, 3, Side.CLIENT);
+
+        packetNetwork.registerMessage(ServerParticleEffectPacket.class, ServerParticleEffectPacket.class, 4, Side.SERVER);
+        packetNetwork.registerMessage(ServerJutsuPacket.class, ServerJutsuPacket.class, 5, Side.SERVER);
+        packetNetwork.registerMessage(ServerAnimationPacket.class, ServerAnimationPacket.class, 6, Side.SERVER);
+        packetNetwork.registerMessage(ServerSoundPacket.class, ServerSoundPacket.class, 7, Side.SERVER);
+
     }
 }
