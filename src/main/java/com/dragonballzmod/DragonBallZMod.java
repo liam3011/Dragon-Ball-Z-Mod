@@ -9,11 +9,11 @@ import com.dragonballzmod.events.EventHook;
 import com.dragonballzmod.help.Reference;
 import com.dragonballzmod.items.DragonBallZItems;
 import com.dragonballzmod.packets.clientbound.ClientAnimationPacket;
-import com.dragonballzmod.packets.clientbound.ClientJutsuPacket;
+import com.dragonballzmod.packets.clientbound.ClientAbilityPacket;
 import com.dragonballzmod.packets.clientbound.ClientParticleEffectPacket;
 import com.dragonballzmod.packets.clientbound.ClientSoundPacket;
 import com.dragonballzmod.packets.serverbound.ServerAnimationPacket;
-import com.dragonballzmod.packets.serverbound.ServerJutsuPacket;
+import com.dragonballzmod.packets.serverbound.ServerAbilityPacket;
 import com.dragonballzmod.packets.serverbound.ServerParticleEffectPacket;
 import com.dragonballzmod.packets.serverbound.ServerSoundPacket;
 import cpw.mods.fml.common.Mod;
@@ -91,12 +91,12 @@ public class DragonBallZMod {
         // Stands for Sekwah's Naruto Mod
         packetNetwork = NetworkRegistry.INSTANCE.newSimpleChannel("SNM");
         packetNetwork.registerMessage(ClientParticleEffectPacket.class, ClientParticleEffectPacket.class, 0, Side.CLIENT);
-        packetNetwork.registerMessage(ClientJutsuPacket.class, ClientJutsuPacket.class, 1, Side.CLIENT);
+        packetNetwork.registerMessage(ClientAbilityPacket.class, ClientAbilityPacket.class, 1, Side.CLIENT);
         packetNetwork.registerMessage(ClientSoundPacket.class, ClientSoundPacket.class, 2, Side.CLIENT);
         packetNetwork.registerMessage(ClientAnimationPacket.class, ClientAnimationPacket.class, 3, Side.CLIENT);
 
         packetNetwork.registerMessage(ServerParticleEffectPacket.class, ServerParticleEffectPacket.class, 4, Side.SERVER);
-        packetNetwork.registerMessage(ServerJutsuPacket.class, ServerJutsuPacket.class, 5, Side.SERVER);
+        packetNetwork.registerMessage(ServerAbilityPacket.class, ServerAbilityPacket.class, 5, Side.SERVER);
         packetNetwork.registerMessage(ServerAnimationPacket.class, ServerAnimationPacket.class, 6, Side.SERVER);
         packetNetwork.registerMessage(ServerSoundPacket.class, ServerSoundPacket.class, 7, Side.SERVER);
 

@@ -4,9 +4,7 @@ import com.dragonballzmod.particles.EntityColouredSmokeFX;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 
-/**
- * Created by Alastair on 01/03/2015.
- */
+
 public class Particles {
     public static void addParticle(Particle particle, World worldObj, double x, double y, double z, float... args) {
         switch(particle){

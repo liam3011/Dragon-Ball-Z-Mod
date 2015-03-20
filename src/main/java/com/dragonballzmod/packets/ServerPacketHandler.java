@@ -1,12 +1,10 @@
 package com.dragonballzmod.packets;
 
+import com.dragonballzmod.packets.clientbound.ClientParticleEffectPacket;
+import com.dragonballzmod.packets.clientbound.ClientSoundPacket;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.player.EntityPlayerMP;
-import sekwah.mods.narutomod.generic.JutsuCommon;
-import sekwah.mods.narutomod.packets.clientbound.ClientJutsuPacket;
-import sekwah.mods.narutomod.packets.clientbound.ClientParticleEffectPacket;
-import sekwah.mods.narutomod.packets.clientbound.ClientSoundPacket;
 
 import java.io.*;
 
@@ -24,7 +22,7 @@ public class ServerPacketHandler {
         }
 
         // We are on the server side.
-        if (JutsuCommon.execute(JutsuCombo, playerEntity)) {
+        /*if (JutsuCommon.execute(JutsuCombo, playerEntity)) {
             PacketDispatcher.sendPacketToPlayer(new ClientJutsuPacket(packet), playerEntity);
         } else {
             // Makes sure that the server also has the jutsu, this way if the feature like
@@ -40,7 +38,7 @@ public class ServerPacketHandler {
 
             PacketDispatcher.sendPacketToPlayer(new ClientJutsuPacket(bos.toByteArray()), playerEntity);
 
-        }
+        }*/
     }
 
     public static void handleParticlePacket(byte[] packet) {
