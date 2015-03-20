@@ -1,0 +1,5 @@
+{
+  "testsound.power": {"category": "player","sounds": [{"name": "testsound/power","stream": false}]},
+  "testsound.death": {"category": "neutral","sounds": [{"name": "testsound/death","stream": false}]},
+  "testsound.test": {"category": "master","sounds": [{"name": "testsound/test","stream": false}]}
+}
