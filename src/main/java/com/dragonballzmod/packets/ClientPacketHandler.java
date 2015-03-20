@@ -2,9 +2,6 @@ package com.dragonballzmod.packets;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import sekwah.mods.narutomod.client.JutsuClient;
-import sekwah.mods.narutomod.client.ParticleEffects;
-import sekwah.mods.narutomod.client.SoundEffects;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -24,7 +21,7 @@ public class ClientPacketHandler {
             e.printStackTrace();
         }
 
-        JutsuClient.execute(JutsuCombo, playerMP);
+        //JutsuClient.execute(JutsuCombo, playerMP);
     }
 
     public static void handleParticleEffect(byte[] packet) {
@@ -45,7 +42,7 @@ public class ClientPacketHandler {
             e.printStackTrace();
         }
         EntityClientPlayerMP playerMP = FMLClientHandler.instance().getClient().thePlayer;
-        ParticleEffects.execute(effectID, playerMP, x, y, z);
+        //ParticleEffects.execute(effectID, playerMP, x, y, z);
     }
 
     public static void handleAnimationData(byte[] packet) {
@@ -69,7 +66,7 @@ public class ClientPacketHandler {
             e.printStackTrace();
         }
         EntityClientPlayerMP playerMP = FMLClientHandler.instance().getClient().thePlayer;
-        SoundEffects.play(soundID,playerMP,x,y,z);
+        //SoundEffects.play(soundID,playerMP,x,y,z);
     }
 
 }
