@@ -1,5 +1,6 @@
 package com.dragonballzmod.events;
 
+import com.dragonballzmod.player.extendedproperties.PlayerInfo;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -24,6 +25,8 @@ public class EventHook {
             dw.addObject(26, "default"); // lastpose (so the smooth animation works between poses)
             dw.addObject(27, "default"); // lastposeClient (the last pose the client updated(so it can change the animationTick back to 0))
             //dw.addObject(27, 0); // could also possibly add a kunai throw tick.
+
+            event.entity.registerExtendedProperties(PlayerInfo.IDENTIFIER, new PlayerInfo((EntityPlayer) event.entity));
 
             Side side = FMLCommonHandler.instance().getEffectiveSide();
             if (side == Side.CLIENT) {
