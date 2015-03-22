@@ -451,6 +451,9 @@ public class ModelDBZBiped extends ModelBiped {
             this.bipedLowerBody.setRotationPoint(0F, 6F + par2, 0F);
             this.bipedRightLegUpper.setRotationPoint(-2F, 12.0F + par2, 0.0F);
             this.bipedLeftLegUpper.setRotationPoint(2F, 12.0F + par2, 0.0F);
+            
+            this.bipedRightArmLower.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 0.4F * par2 * 0.4F;
+            this.bipedLeftArmLower.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 0.4F * par2 * 0.4F;
         }
 
         // TODO try to make knees animate a bit better
@@ -550,29 +553,24 @@ public class ModelDBZBiped extends ModelBiped {
         }
 
         if (this.isSprinting) {
-            this.bipedLowerBody.rotateAngleX = 0F;
-            this.bipedBody.rotateAngleX = 0.7435722F;
+            this.bipedRightArmLower.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 0.7F * par2 * 0.4F;
+            this.bipedLeftArmLower.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 0.7F * par2 * 0.4F;
+
+            this.bipedLowerBody.rotateAngleX = 0.1F;
+            this.bipedBody.rotateAngleX = 0.3435722F;
             this.bipedLowerBody.rotateAngleY = 0F;
             this.bipedBody.rotateAngleY = 0F;
-            this.bipedLowerBody.rotateAngleZ = 0F;
+            this.bipedLowerBody.rotateAngleZ = 0.0F;
             this.bipedBody.rotateAngleZ = 0F;
-            this.bipedRightArmUpper.rotateAngleX = 1.412787F;
-            this.bipedRightArmUpper.rotateAngleY = 0F;
-            this.bipedRightArmUpper.rotateAngleZ = 0F;
-            this.bipedLeftArmUpper.rotateAngleX = 1.412787F;
-            this.bipedLeftArmUpper.rotateAngleY = 0F;
-            this.bipedLeftArmUpper.rotateAngleZ = 0F;
-            this.bipedHead.rotateAngleX = 0F;
-            this.bipedHeadwear.rotateAngleX = 0F;
-            this.bipedHead.setRotationPoint(0F, 3.133333F, -5F);
-            this.bipedMask.setRotationPoint(0F, 3.133333F, -5F);
-            this.bipedMaskmed.setRotationPoint(0F, 3.133333F, -5F);
-            this.bipedMasksmall.setRotationPoint(0F, 3.133333F, -5F);
-            this.bipedHeadwear.setRotationPoint(0F, 3.133333F, -5F);
-            this.bipedBody.setRotationPoint(0F, 3F, -3.5F);
+            this.bipedHead.setRotationPoint(0F, 1.3F, -2F);
+            this.bipedMask.setRotationPoint(0F, 0.9F, -3F);
+            this.bipedMaskmed.setRotationPoint(0F, 0.9F, -3F);
+            this.bipedMasksmall.setRotationPoint(0F, 0.9F, -3F);
+            this.bipedHeadwear.setRotationPoint(0F, 0.9F, -3F);
+            this.bipedBody.setRotationPoint(0F, 0.9F, -1.9F);
             this.bipedLowerBody.setRotationPoint(0F, 6F, 0F);
-            this.bipedRightArmUpper.setRotationPoint(-5F, 3.933333F, -3F);
-            this.bipedLeftArmUpper.setRotationPoint(5F, 3.266667F, -3F);
+            this.bipedRightArmUpper.setRotationPoint(-5F, 3.233333F, -2F);
+            this.bipedLeftArmUpper.setRotationPoint(5F, 3.266667F, -2F);
             this.bipedRightLegUpper.setRotationPoint(-2F, 12.0F, 0.0F);
             this.bipedLeftLegUpper.setRotationPoint(2F, 12.0F, 0.0F);
             this.bipedCloak.setRotationPoint(0F, -3F, 3F);

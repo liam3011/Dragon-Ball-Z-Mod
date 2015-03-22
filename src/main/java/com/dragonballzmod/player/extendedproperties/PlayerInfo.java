@@ -14,9 +14,11 @@ public class PlayerInfo implements IExtendedEntityProperties
     // could be usefull but not currently used, also this will only exist on a player and will not change so its reasonably safe
     private final EntityPlayer player;
 
-    private String race;
-
     private int currentKi, maxKi;
+
+    private int RACE_WATCHER = 21;
+
+    public String race = "Undefined";
 
     /*
     The default constructor takes no arguments, but I put in the Entity so I can initialize the above variable 'player'
@@ -26,8 +28,6 @@ public class PlayerInfo implements IExtendedEntityProperties
     public PlayerInfo(EntityPlayer player)
     {
         this.player = player;
-
-        race = "Unpicked";
 
         // Load with max mana, maybe save the mana amount and load it to stop it messing with single player, also have stats and stuff change the max ki
         this.currentKi = this.currentKi = 50;
@@ -40,6 +40,19 @@ public class PlayerInfo implements IExtendedEntityProperties
     public static final void register(EntityPlayer player)
     {
         player.registerExtendedProperties(PlayerInfo.IDENTIFIER, new PlayerInfo(player));
+    }
+
+    public void copyData(PlayerInfo info) {
+        this.race = info.race;
+        player.getDataWatcher().updateObject(RACE_WATCHER, race);
+    }
+
+
+    public void reloadDW() {
+        player.getDataWatcher().updateObject(RACE_WATCHER, "Undefined");
+
+        System.out.println("Race: " + race);
+        player.getDataWatcher().updateObject(RACE_WATCHER, race);
     }
 
     /**
@@ -57,7 +70,7 @@ public class PlayerInfo implements IExtendedEntityProperties
     {
         NBTTagCompound properties = new NBTTagCompound();
 
-        properties.setString("Race", this.race);
+        properties.setString("Race", race);
         properties.setInteger("CurrentKi", this.currentKi);
         properties.setInteger("MaxKi", this.maxKi);// possibly calculate the maxKi when a player loads to stop potential cheating with nbt data
 
@@ -72,6 +85,7 @@ public class PlayerInfo implements IExtendedEntityProperties
         this.race = properties.getString("Race");
         this.currentKi = properties.getInteger("CurrentKi");
         this.maxKi = properties.getInteger("MaxKi");
+        this.reloadDW();
         System.out.println("[Dragon Ball Z] Current Ki for player from NBT: " + this.currentKi + "/" + this.maxKi);
     }
 
@@ -103,13 +117,6 @@ public class PlayerInfo implements IExtendedEntityProperties
     public void replenishKi()
     {
         this.currentKi = this.maxKi;
-    }
-
-    public void setRace(String race) {
-        this.race = race;
-    }
-
-    public String getRace() {
-        return race;
+;
     }
 }

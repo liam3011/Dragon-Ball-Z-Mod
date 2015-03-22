@@ -7,9 +7,12 @@ import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 
 public class EventHook {
     @SubscribeEvent
@@ -37,6 +40,7 @@ public class EventHook {
             //event.entity.getEntityData().setBoolean("showEyes", true); // this is so the data is initialised on both sides
         }
 
+
         // TODO add a system to save data about the player, this will probably effect the extendedProperties of the NBT data, to save it it must be registered as a extended property net.minecraft.entity.Entity;
 
         //if(event.entity instanceof EntityPlayerMP){ // this can be used of the else if can be added using side == Side.SERVER
@@ -44,6 +48,23 @@ public class EventHook {
 
         // TODO add some code to send all of the current NBT data to the user on the startup such as unlocked jutsus and everything. Also the players max chakra maybe so that it takes up one less data watcher slot
         //}
+    }
+
+    @SubscribeEvent
+    public void onClonePlayer(PlayerEvent.Clone event) {
+        PlayerInfo.get(event.entityPlayer).copyData(PlayerInfo.get(event.original));
+    }
+
+    @SubscribeEvent
+    public void onJoinWorld(EntityJoinWorldEvent event) {
+        // If you have any non-DataWatcher fields in your extended properties that
+        // need to be synced to the client, you must send a packet each time the
+        // player joins the world; this takes care of dying, changing dimensions, etc.
+        if (event.entity instanceof EntityPlayerMP) {
+            EntityPlayer player = (EntityPlayer) event.entity;
+            PlayerInfo.get(player).reloadDW();
+            //PacketDispatcher.sendTo(new SyncPlayerPropsMessage((EntityPlayer) event.entity), (EntityPlayerMP) event.entity);
+        }
     }
 
     @SubscribeEvent

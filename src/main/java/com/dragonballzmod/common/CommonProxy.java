@@ -14,11 +14,6 @@ public class CommonProxy {
         ServerCommandManager manager = (ServerCommandManager) command;
 
         ((ServerCommandManager) command).registerCommand(new SetRace());
-        System.out.println("SWAG");
-        System.out.println("SWAG");
-        System.out.println("SWAG");
-        System.out.println("SWAG");
-        System.out.println("SWAG");
 
     }
 
