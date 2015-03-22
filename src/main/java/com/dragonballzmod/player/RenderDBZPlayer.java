@@ -1,6 +1,7 @@
 package com.dragonballzmod.player;
 
 import com.dragonballzmod.animation.DBZAnimator;
+import com.dragonballzmod.player.extendedproperties.PlayerInfo;
 import com.dragonballzmod.playeraccessories.ModelNamek;
 import com.dragonballzmod.playeraccessories.ModeltailModel;
 import com.mojang.authlib.GameProfile;
@@ -498,8 +499,9 @@ public class RenderDBZPlayer extends RenderPlayer {
         } else {
             this.mainModel.setRotationAngles(p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_, p_77036_1_);
         }
-
-        if (p_77036_1_.getCommandSenderName().endsWith("liam3011")){
+        //EntityPlayer player = (EntityPlayer) p_77036_1_;
+        //PlayerInfo info = PlayerInfo.get(player);
+        if (p_77036_1_.getDataWatcher().getWatchableObjectString(21).equals("Saiyan")){
             this.bindTexture(saiyanTail);
             modelTail.tailSwing = p_77036_4_;
             modelTail.isSprinting = p_77036_1_.isSprinting();
@@ -516,7 +518,7 @@ public class RenderDBZPlayer extends RenderPlayer {
             modelTail.lowerBodyTrack.render(0.0625F);
             this.bindEntityTexture(p_77036_1_);
         }
-        if (p_77036_1_.getCommandSenderName().endsWith("SEKWAH41")){
+        if (p_77036_1_.getDataWatcher().getWatchableObjectString(21).equals("Namekian")) {
             this.bindTexture(namekEars);
             modelNamekEars.bipedHeadTracker.rotationPointX = this.modelBipedMain.bipedHead.rotationPointX;
             modelNamekEars.bipedHeadTracker.rotationPointY = this.modelBipedMain.bipedHead.rotationPointY;

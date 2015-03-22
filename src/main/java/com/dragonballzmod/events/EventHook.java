@@ -17,10 +17,9 @@ public class EventHook {
         if (event.entity instanceof EntityPlayer) {
             DataWatcher dw = event.entity.getDataWatcher();
             dw.addObject(20, "default"); // jutsu pose id (such as charging)
-            dw.addObject(21, 50); // amount of chakra
-            dw.addObject(22, 50); // max amount of stamina
-            dw.addObject(23, 50); // amount of chakra
-            dw.addObject(24, 0); // amount of kunai in player
+            dw.addObject(21, "None"); // player's race
+            // 22-24 are free atm, may need to shift all values if you want it to work with the naruto mod, or just have an extra one which is saying if
+            //  its a ninja or squishysaiyan
             dw.addObject(25, 0); // animationTick (used to add smooth animation for players to different poses, is currently edited by the client :P)
             dw.addObject(26, "default"); // lastpose (so the smooth animation works between poses)
             dw.addObject(27, "default"); // lastposeClient (the last pose the client updated(so it can change the animationTick back to 0))

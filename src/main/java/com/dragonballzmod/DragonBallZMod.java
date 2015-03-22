@@ -3,6 +3,7 @@ package com.dragonballzmod;
 import com.dragonballzmod.animation.DBZAnimator;
 import com.dragonballzmod.animation.Pose;
 import com.dragonballzmod.blocks.DragonBallZBlocks;
+import com.dragonballzmod.commands.SetRace;
 import com.dragonballzmod.common.CommonProxy;
 import com.dragonballzmod.entity.DragonBallZEntitys;
 import com.dragonballzmod.events.EventHook;
@@ -21,14 +22,18 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.command.ICommandManager;
+import net.minecraft.command.ServerCommandManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 
 
@@ -83,13 +88,23 @@ public class DragonBallZMod {
 
         GameRegistry.addShapelessRecipe(new ItemStack(DragonBallZItems.itemDoomDiamond, 9), DragonBallZBlocks.blockDoomDiamondBlock);
 
+
         proxy.registerEveryThing();
         proxy.registerCustomBlocks();
     }
 
+    @EventHandler
+    public void serverStart(FMLServerStartingEvent event)
+    {
+        MinecraftServer server = MinecraftServer.getServer();
+        ICommandManager command = server.getCommandManager();
+        ServerCommandManager manager = (ServerCommandManager) command;
+        manager.registerCommand(new SetRace());
+    }
+
     private void packetNetwork() {
-        // Stands for Sekwah's Naruto Mod
-        packetNetwork = NetworkRegistry.INSTANCE.newSimpleChannel("SNM");
+        // Stands for DragonBall Z
+        packetNetwork = NetworkRegistry.INSTANCE.newSimpleChannel("DBZ");
         packetNetwork.registerMessage(ClientParticleEffectPacket.class, ClientParticleEffectPacket.class, 0, Side.CLIENT);
         packetNetwork.registerMessage(ClientAbilityPacket.class, ClientAbilityPacket.class, 1, Side.CLIENT);
         packetNetwork.registerMessage(ClientSoundPacket.class, ClientSoundPacket.class, 2, Side.CLIENT);
