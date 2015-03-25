@@ -1,11 +1,15 @@
 package com.dragonballzmod.commands;
 
 import com.dragonballzmod.player.extendedproperties.PlayerInfo;
+import com.mojang.authlib.GameProfile;
+import cpw.mods.fml.client.config.GuiConfigEntries;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntityCommandBlock;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 
 public class SetRace extends IDBZCommand {
 
@@ -18,7 +22,10 @@ public class SetRace extends IDBZCommand {
     @Override
     public String getCommandUsage(ICommandSender icommandsender)
     {
-        return "Set the race by typing the race (/setrace [race])";
+        return "Set the race by typing the race (/setrace [race]). " +
+                "This is designed for debugging and not general use " +
+                "using this once you have a race selected may cause unexpected" +
+                " errors and potentially crash your mc.";
     }
 
     @Override
@@ -27,11 +34,21 @@ public class SetRace extends IDBZCommand {
         if(icommandsender instanceof EntityPlayer)
         {
             EntityPlayer player = (EntityPlayer) icommandsender;
-            //PlayerInfo info = PlayerInfo.get(player);
-            //info.setRace(string[0]);
-            player.getDataWatcher().updateObject(21, string[0]);
-            player.addChatMessage(new ChatComponentText("Race set to: " + string[0]));
+            if(isOp(player.getGameProfile())){
+                PlayerInfo info = PlayerInfo.get(player);
+                info.setRace(string[0]);
+                info.reloadDW();
+                player.addChatMessage(new ChatComponentText("Race set to: " + string[0]));
+            }
+            else{
+                player.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "You must be opped!"));
+            }
         }
+    }
+
+    public static boolean isOp(GameProfile gameProfile)
+    {
+        return MinecraftServer.getServer().getConfigurationManager().func_152596_g(gameProfile);
     }
 
     @Override
