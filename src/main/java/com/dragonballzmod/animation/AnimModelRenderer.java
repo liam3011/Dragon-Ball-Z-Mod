@@ -83,6 +83,15 @@ public class AnimModelRenderer extends ModelRenderer {
         this.cubeList.add(new ModelBox(this, this.textureOffsetX, this.textureOffsetY, p_78790_1_, p_78790_2_, p_78790_3_, p_78790_4_, p_78790_5_, p_78790_6_, p_78790_7_));
     }
 
+    /**
+     * Creates a textured box. Args: originX, originY, originZ, width, height, depth, scaleFactor.
+     */
+    /*public void addRetexturedBox(float p_78790_1_, float p_78790_2_, float p_78790_3_, int p_78790_4_, int p_78790_5_, int p_78790_6_, float p_78790_7_, int i, int i1, int i2, int i3) {
+        this.cubeList.add(new ModelRetexturedBoxSharpBend(this, this.textureOffsetX, this.textureOffsetY, p_78790_1_, p_78790_2_, p_78790_3_, p_78790_4_, p_78790_5_, p_78790_6_, p_78790_7_, i, i1, i2, i3));
+    }*/
+
+
+
     public void setRotationPoint(float p_78793_1_, float p_78793_2_, float p_78793_3_) {
         this.rotationPointX = p_78793_1_;
         this.rotationPointY = p_78793_2_;

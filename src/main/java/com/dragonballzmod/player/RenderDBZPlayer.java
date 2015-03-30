@@ -1,7 +1,6 @@
 package com.dragonballzmod.player;
 
 import com.dragonballzmod.animation.DBZAnimator;
-import com.dragonballzmod.player.extendedproperties.PlayerInfo;
 import com.dragonballzmod.playeraccessories.ModelNamek;
 import com.dragonballzmod.playeraccessories.ModeltailModel;
 import com.mojang.authlib.GameProfile;
@@ -354,6 +353,8 @@ public class RenderDBZPlayer extends RenderPlayer {
             }
 
             GL11.glEnable(GL11.GL_ALPHA_TEST);
+
+            // TODO whereever it is, find the glrotation stuff and either add stuff to poses or just code it for flight
             this.mainModel.setLivingAnimations(p_76986_1_, f7, f6, p_76986_9_);
             this.renderModel(p_76986_1_, f7, f6, f4, f3 - f2, f13, f5);
             int j;

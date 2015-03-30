@@ -21,6 +21,7 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityFlyingNimbus.class, new RenderFlyingNimbus());
         RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderDBZPlayer());
         MinecraftForge.EVENT_BUS.register(new PlayerRenderTickEvent());
+        MinecraftForge.EVENT_BUS.register(new PlayerClientTickEvent());
     }
 
     public void registerCustomBlocks() {

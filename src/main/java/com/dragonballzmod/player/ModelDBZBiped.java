@@ -2,6 +2,8 @@ package com.dragonballzmod.player;
 
 import com.dragonballzmod.animation.AnimModelRenderer;
 import com.dragonballzmod.animation.DBZAnimator;
+import com.dragonballzmod.animation.DynamicPose;
+import com.dragonballzmod.animation.Pose;
 import com.dragonballzmod.animation.modelparts.ModelRetexturedBoxSharpBend;
 import com.dragonballzmod.client.PlayerRenderTickEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -167,9 +169,10 @@ public class ModelDBZBiped extends ModelBiped {
 
         // Arms
 
-        this.bipedRightArmUpper = new AnimModelRenderer(this, 16, 22, "rightArmUpper");
+        this.bipedRightArmUpper = new AnimModelRenderer(this, 40, 16, "rightArmUpper");
         upperRightArmBox = new ModelRetexturedBoxSharpBend(this.bipedRightArmUpper, 40, 16, -3.0F, -2.0F, -2.0F, 4, 6, 4, p_i1149_1_, 44, 16, 44, 26);
         this.bipedRightArmUpper.cubeList.add(upperRightArmBox);
+        //this.bipedRightArmUpper.addRetexturedBox(-3.0F, -2.0F, -2.0F, 4, 6, 4, p_i1149_1_, 44, 16, 44, 26);
         this.bipedRightArmUpper.setRotationPoint(-5.0F, 2.0F + p_i1149_2_, 0.0F);
 
 
@@ -180,7 +183,7 @@ public class ModelDBZBiped extends ModelBiped {
 
         this.bipedRightArmUpper.addChild(this.bipedRightArmLower);
 
-        this.bipedLeftArmUpper = new AnimModelRenderer(this, 16, 22, "leftArmUpper");
+        this.bipedLeftArmUpper = new AnimModelRenderer(this, 40, 16, "leftArmUpper");
         this.bipedLeftArmUpper.mirror = true;
         upperLeftArmBox = new ModelRetexturedBoxSharpBend(this.bipedLeftArmUpper, 40, 16, -1.0F, -2.0F, -2.0F, 4, 6, 4, p_i1149_1_, 44, 16, 44, 26);
         this.bipedLeftArmUpper.cubeList.add(upperLeftArmBox);
@@ -592,6 +595,22 @@ public class ModelDBZBiped extends ModelBiped {
         /**if(!this.animationID.equals("default") || !this.animationlastID.equals("default")){
          PlayerPoseAnimator.animate(this, this.animationID, this.animationlastID, this.animationTick);
          }*/
+        if(this.animationID.equals(this.animationlastID)){
+            Pose pose = DBZAnimator.getPose(animationID, DBZAnimator.playerPoses);
+            if(pose instanceof DynamicPose){
+                ((DynamicPose) pose).updatePose(par1, par2, par3, par4, par5, par6, par7Entity);
+            }
+        }
+        else{
+            Pose pose = DBZAnimator.getPose(animationID, DBZAnimator.playerPoses);
+            if(pose instanceof DynamicPose){
+                ((DynamicPose) pose).updatePose(par1, par2, par3, par4, par5, par6, par7Entity);
+            }
+            Pose lastPose = DBZAnimator.getPose(animationlastID, DBZAnimator.playerPoses);
+            if(lastPose instanceof DynamicPose){
+                ((DynamicPose) lastPose).updatePose(par1, par2, par3, par4, par5, par6, par7Entity);
+            }
+        }
 
         if (!this.animationID.equals("default") || !this.animationlastID.equals("default")) {
             DBZAnimator.animate(this.animationID, this.animationlastID, this.animationTick, this.animatedParts, DBZAnimator.playerPoses);

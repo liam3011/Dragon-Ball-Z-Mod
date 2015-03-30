@@ -1,6 +1,7 @@
 package com.dragonballzmod.packets;
 
 import com.dragonballzmod.DragonBallZMod;
+import com.dragonballzmod.client.PlayerClientTickEvent;
 import com.dragonballzmod.packets.serverbound.ServerAnimationPacket;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -33,6 +34,11 @@ public class PacketAnimationUpdate {
     }
 
     public static void animationUpdate(String animationID, EntityClientPlayerMP playerEntity) {
+
+        if(animationID.equalsIgnoreCase("defaultPose")){
+            animationID = PlayerClientTickEvent.defaultPose;
+        }
+
         if (DragonBallZMod.entityAnimator.getPose(animationID, DragonBallZMod.entityAnimator.playerPoses) == null) {
             //DragonBallZMod.LOGGER.error("[DragonBallZMod] PoseData not found for: " + animationID);
             throw new NullPointerException("PoseData not found for: " + animationID + ". Either the data is missing or an there is something wrong.");

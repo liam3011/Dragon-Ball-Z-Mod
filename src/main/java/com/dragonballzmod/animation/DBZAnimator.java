@@ -1,7 +1,9 @@
 package com.dragonballzmod.animation;
 
+import com.dragonballzmod.animation.dynamicplayerposes.FlyingPose;
 import com.dragonballzmod.client.PlayerRenderTickEvent;
 import com.dragonballzmod.json.JSONObject;
+import com.dragonballzmod.packets.PacketAnimationUpdate;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
@@ -17,8 +19,9 @@ public class DBZAnimator {
     // If you think its nessasary, change it so there is an animator for the player and one for all other mobs(if you think it'll create a significant difference)
     public DBZAnimator() {
         // Setup the default pose, used as a placeholder to stop crashes or potentially replace the playerModels default pose to reduce lag.
-        playerPoses = new Pose[1];
+        playerPoses = new Pose[2];
         playerPoses[0] = new Pose("default");
+        playerPoses[1] = new FlyingPose("flying");
     }
 
     public static Pose[] sortAnimations(Pose[] poses) {
@@ -328,16 +331,22 @@ public class DBZAnimator {
 
         if (dw.getWatchableObjectString(20).equals(dw.getWatchableObjectString(27)) && getPose(dw.getWatchableObjectString(20), poseArray) != null && getPose(dw.getWatchableObjectString(20), poseArray).animLength > dw.getWatchableObjectInt(25)) {
             int delta = PlayerRenderTickEvent.delta;
-            while (delta-- >= 1) {
-                if (getPose(dw.getWatchableObjectString(20), poseArray).animLength > dw.getWatchableObjectInt(25)) {
-                    dw.updateObject(25, dw.getWatchableObjectInt(25) + 1);
-                } else {
-                    if (!PlayerRenderTickEvent.hasFiredAnimationUpdate) {
-                        animationComplete(playerMP, poseArray);
-                    }
-                    PlayerRenderTickEvent.hasFiredAnimationUpdate = true;
+            //while (delta-- >= 1) {
+            Pose currentPose = getPose(dw.getWatchableObjectString(20), poseArray);
+            if (currentPose.animLength > dw.getWatchableObjectInt(25)) {
+                if(dw.getWatchableObjectInt(25) + delta >= currentPose.animLength){
+                    dw.updateObject(25, currentPose.animLength);
                 }
+                else{
+                    dw.updateObject(25, dw.getWatchableObjectInt(25) + delta);
+                }
+            } else {
+                if (!PlayerRenderTickEvent.hasFiredAnimationUpdate) {
+                    animationComplete(playerMP, poseArray);
+                }
+                PlayerRenderTickEvent.hasFiredAnimationUpdate = true;
             }
+            //}
 //            if (NarutoSettings.experimentalFirstPersonMode == 2) {
 //                NarutoSettings.experimentalFirstPerson = true;
 //            }
@@ -370,7 +379,7 @@ public class DBZAnimator {
         Pose pose = getPose(animationID, poseArray);
         if (pose != null) {
             if (pose.nextPose != null) {
-              //  PacketAnimationUpdate.animationUpdate(pose.nextPose, playerMP);
+              PacketAnimationUpdate.animationUpdate(pose.nextPose, playerMP);
             }
             if (pose.completeAction != 0) {
 

@@ -1,7 +1,9 @@
 package com.dragonballzmod.animation;
 
 
-public class Pose {
+import com.dragonballzmod.animation.dynamicplayerposes.Pose;
+
+public class Pose implements com.dragonballzmod.animation.dynamicplayerposes.Pose {
 
     public String poseName;
 
@@ -20,10 +22,6 @@ public class Pose {
     public Pose(String poseName, PartData... partData) {
         this.poseName = poseName;
         this.partData = partData;
-    }
-
-    public void updatePose() {
-
     }
 
 }
