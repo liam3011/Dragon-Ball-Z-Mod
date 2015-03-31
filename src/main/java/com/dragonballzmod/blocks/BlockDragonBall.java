@@ -97,6 +97,7 @@ public class BlockDragonBall extends BlockContainer {
         else if(ballStage == 3){
             par1World.addWeatherEffect(new EntityLightningBolt(par1World, x,y,z));
             EntityCaveSpider spider = new EntityCaveSpider(par1World);
+            spider.setCustomNameTag("Shenron");
             spider.setPosition(x,y + 1,z);
             par1World.spawnEntityInWorld(spider);
         }
