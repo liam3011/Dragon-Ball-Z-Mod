@@ -1,9 +1,7 @@
 package com.dragonballzmod.animation;
 
 
-import com.dragonballzmod.animation.dynamicplayerposes.Pose;
-
-public class Pose implements com.dragonballzmod.animation.dynamicplayerposes.Pose {
+public class Pose {
 
     public String poseName;
 
