@@ -22,27 +22,27 @@ public class FlyingPose extends DynamicPose {
         super("flying");
 
         partData = new PartData[11];
-        rightArmUpper = new PartData("rightArmUpper");
+        rightArmUpper = new PartData("rightArmUpper", true, true);
         partData[0] = rightArmUpper;
-        rightArmLower = new PartData("rightArmLower");
+        rightArmLower = new PartData("rightArmLower", true, true);
         partData[1] =rightArmLower;
-        leftArmUpper = new PartData("leftArmUpper");
+        leftArmUpper = new PartData("leftArmUpper", true, true);
         partData[2] = leftArmUpper;
-        leftArmLower = new PartData("leftArmLower");
+        leftArmLower = new PartData("leftArmLower", true, true);
         partData[3] = leftArmLower;
         head = new PartData("head");
         partData[4] = head;
-        upperBody = new PartData("upperBody");
+        upperBody = new PartData("upperBody", true, true);
         partData[5] = upperBody;
-        lowerBody = new PartData("lowerBody");
+        lowerBody = new PartData("lowerBody", true, true);
         partData[6] = lowerBody;
-        rightLegUpper = new PartData("rightLegUpper");
+        rightLegUpper = new PartData("rightLegUpper", true, true);
         partData[7] = rightLegUpper;
-        rightLegLower = new PartData("rightLegLower");
+        rightLegLower = new PartData("rightLegLower", true, true);
         partData[8] =rightLegLower;
-        leftLegUpper = new PartData("leftLegUpper");
+        leftLegUpper = new PartData("leftLegUpper", true, true);
         partData[9] = leftLegUpper;
-        leftLegLower = new PartData("leftLegLower");
+        leftLegLower = new PartData("leftLegLower", true, true);
         partData[10] = leftLegLower;
 
         partData = DBZAnimator.sortParts(partData);
