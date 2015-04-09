@@ -1,5 +1,6 @@
 package com.dragonballzmod.client;
 
+import com.dragonballzmod.packets.PacketAnimationUpdate;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
@@ -8,6 +9,9 @@ import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.entity.DataWatcher;
+
+import java.util.ArrayList;
 
 public class PlayerClientTickEvent {
     // to do with the keypress data for jutsus
@@ -27,19 +31,19 @@ public class PlayerClientTickEvent {
     private static double lastZ;
     private static boolean playerMoved;
 
+    public static ArrayList<String> defaultAnims = new ArrayList<String>();
+
     public static String defaultPose = "default";
 
     public int animationUpdate; // use at some point to update animations after they have been set.
+    private boolean hasSentUpdatePacket = false;
+
+    public PlayerClientTickEvent(){
+        defaultAnims.add("default");
+        defaultAnims.add("flying");
+    }
 
     public static String getJutsuPoseID() {
-        if (jutsuPoseID == "default") {
-            //if(isChakraFocus){
-            //	return "chakraCharging";
-            //}
-            //else{
-            return "default";
-            //}
-        }
         return jutsuPoseID;
     }
 
@@ -58,6 +62,26 @@ public class PlayerClientTickEvent {
             }
             else{
                 defaultPose = "default";
+            }
+
+            // TODO change stuff and get this all working to change animations
+            // System.out.println(defaultPose);
+
+            // tell it to send if the animation was default but has changed
+
+            DataWatcher dw = playerMP.getDataWatcher();
+
+            //System.out.println(dw.getWatchableObjectString(20));
+
+            // TODO set hasSentUpdatePacket to false when the animation is not in the list or is equal to the current one.
+
+            if(dw.getWatchableObjectString(20).equals(defaultPose)){
+                hasSentUpdatePacket = false;
+            }
+
+            if(defaultAnims.contains(dw.getWatchableObjectString(20)) && !dw.getWatchableObjectString(20).equals(defaultPose) && !hasSentUpdatePacket){
+                hasSentUpdatePacket = true;
+                PacketAnimationUpdate.animationUpdate(defaultPose, playerMP);
             }
 
             if (lastX == playerMP.posX && lastY == playerMP.posY && lastZ == playerMP.posZ) {

@@ -1,5 +1,6 @@
 package com.dragonballzmod.packets;
 
+import com.dragonballzmod.DragonBallZMod;
 import com.dragonballzmod.packets.clientbound.ClientParticleEffectPacket;
 import com.dragonballzmod.packets.clientbound.ClientSoundPacket;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
@@ -84,17 +85,17 @@ public class ServerPacketHandler {
 
     public static void handleAnimationPacket(byte[] packet, EntityPlayerMP playerEntity) {
         DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet));
-        String jutsuPose = "default";
+        String animPose = "default";
         try {
-            jutsuPose = inputStream.readUTF();
+            animPose = inputStream.readUTF();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         DataWatcher dw = playerEntity.getDataWatcher();
-        System.out.println(jutsuPose);
+        DragonBallZMod.LOGGER.info(animPose);
 
-        dw.updateObject(20, jutsuPose);
+        dw.updateObject(20, animPose);
         dw.updateObject(25, 0);
     }
 

@@ -2,6 +2,7 @@ package com.dragonballzmod;
 
 import com.dragonballzmod.animation.DBZAnimator;
 import com.dragonballzmod.animation.Pose;
+import com.dragonballzmod.animation.dynamicplayerposes.FlyingPose;
 import com.dragonballzmod.blocks.DragonBallZBlocks;
 import com.dragonballzmod.commands.SetRace;
 import com.dragonballzmod.common.CommonProxy;
@@ -35,6 +36,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.io.InputStream;
 
 
 @Mod(modid = Reference.MODID, version = Reference.VERSION)
@@ -44,6 +49,8 @@ public class DragonBallZMod {
     public static final String version = Reference.VERSION;
 
     public static SimpleNetworkWrapper packetNetwork;
+
+    public static final Logger LOGGER = LogManager.getLogger("DragonBallZ");
 
     //Proxy:
     @SidedProxy(clientSide = "com.dragonballzmod.client.ClientProxy", serverSide = "com.dragonballzmod.common.CommonProxy")
@@ -73,8 +80,12 @@ public class DragonBallZMod {
 
         entityAnimator = new DBZAnimator();
 
-        DBZAnimator.playerPoses = new Pose[1];
+        DBZAnimator.playerPoses = new Pose[2];
         DBZAnimator.playerPoses[0] = new Pose("default");
+        DBZAnimator.playerPoses[1] = new FlyingPose();
+
+        InputStream fileStreamJson = DragonBallZMod.class.getResourceAsStream("/assets/dragonballzmod/mod/poseData.json");
+        entityAnimator.playerPoses = entityAnimator.addPoses(fileStreamJson, entityAnimator.playerPoses);
         
         MinecraftForge.EVENT_BUS.register(new EventHook());
         DragonBallZBlocks.addBlocks();
