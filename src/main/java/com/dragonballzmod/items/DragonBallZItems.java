@@ -11,6 +11,7 @@ public class DragonBallZItems {
     public static Item itemDoomDiamond;
     public static Item itemBattleArmorChest1;
     public static Item itemDinoCap;
+    public static Item itemTempPortal;
 
     private static ItemArmor.ArmorMaterial battleArmorMaterial = EnumHelper.addArmorMaterial("SHINOBI", 35, new int[]{2, 8, 5, 2}, 10);
 

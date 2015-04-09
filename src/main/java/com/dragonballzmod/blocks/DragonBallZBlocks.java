@@ -26,6 +26,8 @@ public class DragonBallZBlocks {
     public static Block blockDragonBall5;
     public static Block blockDragonBall6;
     public static Block blockDragonBall7;
+//    public static Block blockNamekianDiamond;
+    public static Block blockTempPortal;
 
     public static void addBlocks() {
         //Blocks Classes:
@@ -46,6 +48,8 @@ public class DragonBallZBlocks {
         blockDragonBall5 = new BlockDragonBall(5).setBlockName("blockDragonBall5");
         blockDragonBall6 = new BlockDragonBall(6).setBlockName("blockDragonBall6");
         blockDragonBall7 = new BlockDragonBall(7).setBlockName("blockDragonBall7");
+      //  blockNamekianDiamond = new BlockNamekianDiamond().setBlockName("blockNamekianDiamond");
+      //  blockTempPortal = new BlockTempPortal().setBlockName("blockTempPortal");
 
 
         //Block Register:
@@ -65,6 +69,8 @@ public class DragonBallZBlocks {
         RegisterHelper.registerBlock(blockDragonBall5);
         RegisterHelper.registerBlock(blockDragonBall6);
         RegisterHelper.registerBlock(blockDragonBall7);
+      //  RegisterHelper.registerBlock(blockNamekianDiamond);
+      //  RegisterHelper.registerBlock(blockTempPortal);
 
         //Recipes
         GameRegistry.addSmelting(blockNamekianIronOre, new ItemStack(Items.iron_ingot), 20F);

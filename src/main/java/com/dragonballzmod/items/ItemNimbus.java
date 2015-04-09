@@ -81,13 +81,13 @@ public class ItemNimbus extends Item {
                         --j;
                     }
 
-                  //  EntityFlyingNimbus entityFlyingNimbus = new EntityFlyingNimbus(p_77659_2_, (double) ((float) i + 0.5F), (double) ((float) j + 1.0F), (double) ((float) k + 0.5F));
-                 //   entityFlyingNimbus.rotationYaw = (float) (((MathHelper.floor_double((double) (p_77659_3_.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
+                //    EntityFlyingNimbus entityFlyingNimbus = new EntityFlyingNimbus(p_77659_2_, (double) ((float) i + 0.5F), (double) ((float) j + 1.0F), (double) ((float) k + 0.5F));
+                //    entityFlyingNimbus.rotationYaw = (float) (((MathHelper.floor_double((double) (p_77659_3_.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) - 1) * 90);
 
 
 
                     EntityFlyingNimbus entityFlyingNimbus = new EntityFlyingNimbus(p_77659_2_, i + 0.5F, j + 1.0F, k + 0.5F);
-                    entityFlyingNimbus.rotationYaw = (((MathHelper.floor_double(p_77659_3_.rotationYaw * 4.0F / 360.0F + 0.5D) & 0x3) - 1) * 90);
+                    entityFlyingNimbus.rotationYaw = (((MathHelper.floor_double(p_77659_3_.rotationYaw * 5.0F / 360.0F + 0.5D) & 0x3) - 1) * 90);
 
                     if (!p_77659_2_.getCollidingBoundingBoxes(entityFlyingNimbus, entityFlyingNimbus.boundingBox.expand(-0.1D, -0.1D, -0.1D)).isEmpty()) {
                         return p_77659_1_;
