@@ -66,7 +66,7 @@ public class ModelRetexturedBoxSharpBend extends ModelBox {
         args[10] = topY;
         args[11] = botX;
         args[12] = botY;
-        this.createCubeQuads(par1ModelRenderer, (int) args[0], (int) args[1], args[2], args[3], args[4], (int) args[5], (int) args[6], (int) args[7], (int) args[8], (int) args[9], (int) args[10], (int) args[11], (int) args[12]);
+        this.createCubeQuads(par1ModelRenderer, (int) args[0], (int) args[1], args[2], args[3], args[4], (int) args[5], (int) args[6], (int) args[7], args[8], (int) args[9], (int) args[10], (int) args[11], (int) args[12]);
     }
 
     public void createCubeQuads(ModelRenderer par1ModelRenderer, int par2, int par3, float par4, float par5, float par6, int par7, int par8, int par9, float par10, int topX, int topY, int botX, int botY) {
@@ -160,11 +160,11 @@ public class ModelRetexturedBoxSharpBend extends ModelBox {
 
     public void setLowerRotation(ModelRenderer par1ModelRenderer, float rotateAngleX) {
         this.lowerRotation = rotateAngleX;
-        this.createCubeQuads(par1ModelRenderer, (int) args[0], (int) args[1], args[2], args[3], args[4], (int) args[5], (int) args[6], (int) args[7], (int) args[8], (int) args[9], (int) args[10], (int) args[11], (int) args[12]);
+        this.createCubeQuads(par1ModelRenderer, (int) args[0], (int) args[1], args[2], args[3], args[4], (int) args[5], (int) args[6], (int) args[7], args[8], (int) args[9], (int) args[10], (int) args[11], (int) args[12]);
     }
 
     public void setUpperRotation(ModelRenderer par1ModelRenderer, float rotateAngleX) {
         this.upperRotation = rotateAngleX;
-        this.createCubeQuads(par1ModelRenderer, (int) args[0], (int) args[1], args[2], args[3], args[4], (int) args[5], (int) args[6], (int) args[7], (int) args[8], (int) args[9], (int) args[10], (int) args[11], (int) args[12]);
+        this.createCubeQuads(par1ModelRenderer, (int) args[0], (int) args[1], args[2], args[3], args[4], (int) args[5], (int) args[6], (int) args[7], args[8], (int) args[9], (int) args[10], (int) args[11], (int) args[12]);
     }
 }

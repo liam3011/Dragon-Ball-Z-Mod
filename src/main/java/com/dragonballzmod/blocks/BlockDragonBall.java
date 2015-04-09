@@ -59,30 +59,32 @@ public class BlockDragonBall extends BlockContainer {
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         Side side = FMLCommonHandler.instance().getSide();
 
-        //  par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, par2, par3, par4));
+        if(stars == 7){
+            //  par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, par2, par3, par4));
 
-        //  if(side == Side.CLIENT) {
-        //    par5EntityPlayer.addChatMessage(new ChatComponentText("Eternal dragon, by your name I summon you forth! SHENRON!!!"));
-        if(!par1World.isRemote){
-            par5EntityPlayer.addChatMessage(new ChatComponentText("Eternal dragon, by your name I summon you forth! SHENRON!!!"));
+            //  if(side == Side.CLIENT) {
+            //    par5EntityPlayer.addChatMessage(new ChatComponentText("Eternal dragon, by your name I summon you forth! SHENRON!!!"));
+            if(!par1World.isRemote){
+                par5EntityPlayer.addChatMessage(new ChatComponentText("Eternal dragon, by your name I summon you forth! SHENRON!!!"));
+            }
+            //  par5EntityPlayer.addChatComponentMessage(new ChatComponentText("Eternal dragon, by your name I summon you forth! SHENRON!!!"));
+            // par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, par2, par3, par4));
+
+            // ((EntityPlayerMP) par5EntityPlayer).playerNetServerHandler.sendPacket(new S0EPacketSpawnObject(new EntityLightningBolt(par1World, par2, par3, par4), 0));
+            // par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, par2, par3, par4));
+            par1World.scheduleBlockUpdate(par2, par3, par4, this, 1);
+            ballStage = 0;
+
+            // if(par1World.getBiomeGenForCoords(0,0) != BiomeGenBase.sky){
+            //     BiomeGenBase.getBiome(16).temperature = 0.0f;
+
+
+            // }
+            // event.getPlayer().getWorld().getBiome();
+            // if( event.getPlayer().getWorld().getBiome() != BiomeGenBase.sky){
+            //     event.getPlayer().getWorld().getBiome().temperature = 0.0F;
+            // }
         }
-        //  par5EntityPlayer.addChatComponentMessage(new ChatComponentText("Eternal dragon, by your name I summon you forth! SHENRON!!!"));
-        // par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, par2, par3, par4));
-
-        // ((EntityPlayerMP) par5EntityPlayer).playerNetServerHandler.sendPacket(new S0EPacketSpawnObject(new EntityLightningBolt(par1World, par2, par3, par4), 0));
-        // par1World.spawnEntityInWorld(new EntityLightningBolt(par1World, par2, par3, par4));
-        par1World.scheduleBlockUpdate(par2, par3, par4, this, 1);
-        ballStage = 0;
-
-        // if(par1World.getBiomeGenForCoords(0,0) != BiomeGenBase.sky){
-        //     BiomeGenBase.getBiome(16).temperature = 0.0f;
-
-
-        // }
-        // event.getPlayer().getWorld().getBiome();
-        // if( event.getPlayer().getWorld().getBiome() != BiomeGenBase.sky){
-        //     event.getPlayer().getWorld().getBiome().temperature = 0.0F;
-        // }
 
 
         return true;

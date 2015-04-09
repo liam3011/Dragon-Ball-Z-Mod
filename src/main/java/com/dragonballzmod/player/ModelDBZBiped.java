@@ -2,7 +2,7 @@ package com.dragonballzmod.player;
 
 import com.dragonballzmod.animation.AnimModelRenderer;
 import com.dragonballzmod.animation.DBZAnimator;
-import com.dragonballzmod.animation.DynamicPose;
+import com.dragonballzmod.animation.dynamicplayerposes.DynamicPose;
 import com.dragonballzmod.animation.Pose;
 import com.dragonballzmod.animation.modelparts.ModelRetexturedBoxSharpBend;
 import com.dragonballzmod.client.PlayerRenderTickEvent;
@@ -595,6 +595,7 @@ public class ModelDBZBiped extends ModelBiped {
         /**if(!this.animationID.equals("default") || !this.animationlastID.equals("default")){
          PlayerPoseAnimator.animate(this, this.animationID, this.animationlastID, this.animationTick);
          }*/
+
         if(this.animationID.equals(this.animationlastID)){
             Pose pose = DBZAnimator.getPose(animationID, DBZAnimator.playerPoses);
             if(pose instanceof DynamicPose){
@@ -611,6 +612,7 @@ public class ModelDBZBiped extends ModelBiped {
                 ((DynamicPose) lastPose).updatePose(par1, par2, par3, par4, par5, par6, par7Entity);
             }
         }
+
 
         if (!this.animationID.equals("default") || !this.animationlastID.equals("default")) {
             DBZAnimator.animate(this.animationID, this.animationlastID, this.animationTick, this.animatedParts, DBZAnimator.playerPoses);

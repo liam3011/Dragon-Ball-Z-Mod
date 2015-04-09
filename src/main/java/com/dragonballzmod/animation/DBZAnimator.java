@@ -1,6 +1,6 @@
 package com.dragonballzmod.animation;
 
-import com.dragonballzmod.animation.dynamicplayerposes.FlyingPose;
+import com.dragonballzmod.DragonBallZMod;
 import com.dragonballzmod.client.PlayerRenderTickEvent;
 import com.dragonballzmod.json.JSONObject;
 import com.dragonballzmod.packets.PacketAnimationUpdate;
@@ -19,9 +19,8 @@ public class DBZAnimator {
     // If you think its nessasary, change it so there is an animator for the player and one for all other mobs(if you think it'll create a significant difference)
     public DBZAnimator() {
         // Setup the default pose, used as a placeholder to stop crashes or potentially replace the playerModels default pose to reduce lag.
-        playerPoses = new Pose[2];
+        playerPoses = new Pose[1];
         playerPoses[0] = new Pose("default");
-        playerPoses[1] = new FlyingPose("flying");
     }
 
     public static Pose[] sortAnimations(Pose[] poses) {
@@ -124,56 +123,47 @@ public class DBZAnimator {
     }
 
     public static PartData getPart(String animationID, PartData[] partArray) {
-        int first = 0;
-        int last = partArray.length - 1;
-        int currentCharacter = 0;
-        int center = -1;
-        while (last - first >= 0) {
-            center = (int) Math.ceil(first + (last - first) / 2F);
-            if (partArray[center].partName.equals(animationID)) {
-                return partArray[center];
-            }
-            int difference = last - first;
-            for (int i = 0; i < animationID.length(); i++) {
-                if (i <= partArray[center].partName.length() - 1 && i <= animationID.length() - 1) {
-                    char animChar = animationID.charAt(i);
-                    char poseChar = partArray[center].partName.charAt(i);
-                    if (animChar < poseChar) {
-                        last = center - 1;
-                        break;
-                    } else if (animChar > poseChar) {
+        if(partArray != null){
+            int first = 0;
+            int last = partArray.length - 1;
+            int currentCharacter = 0;
+            int center = -1;
+            while (last - first >= 0) {
+                center = (int) Math.ceil(first + (last - first) / 2F);
+                if (partArray[center].partName.equals(animationID)) {
+                    return partArray[center];
+                }
+                int difference = last - first;
+                for (int i = 0; i < animationID.length(); i++) {
+                    if (i <= partArray[center].partName.length() - 1 && i <= animationID.length() - 1) {
+                        char animChar = animationID.charAt(i);
+                        char poseChar = partArray[center].partName.charAt(i);
+                        if (animChar < poseChar) {
+                            last = center - 1;
+                            break;
+                        } else if (animChar > poseChar) {
+                            first = center;
+                            break;
+                        }
+                    } else if (i > partArray[center].partName.length() - 1) {
                         first = center;
                         break;
+                    } else if (i > animationID.length() - 1) {
+                        last = center;
+                        break;
                     }
-                } else if (i > partArray[center].partName.length() - 1) {
-                    first = center;
-                    break;
-                } else if (i > animationID.length() - 1) {
-                    last = center;
-                    break;
                 }
-            }
-            if (last - first == difference) {
-                last -= 1;
+                if (last - first == difference) {
+                    last -= 1;
+                }
             }
         }
         return null;
     }
 
     public static void animate(String animationID, String animationlastID, int animationTick, ArrayList<AnimModelRenderer> animatedParts, Pose[] poseArray) {
-        /**if(animationID != "default"){
-         if(poses.has(animationID)){
-         JSONObject lastPoseInfo = poses.getJSONObject(animationID);
-         JSONObject locData = lastPoseInfo.getJSONObject("locData");
 
-         if(locData.has("rightArmUpper")){lastPosePart(modelBiped.bipedRightArm, locData.getJSONObject("rightArm"));}
 
-         if(locData.has("leftArmUpper")){lastPosePart(modelBiped.bipedLeftArm, locData.getJSONObject("leftArm"));}
-
-         }
-         }*/
-
-        //System.out.println("anim:" + animationID + " lastAnim:" + animationlastID + " animationTick:" + animationTick);
         if (animationID.equals("default") && !animationlastID.equals("default")) { // add animation to default too!
             // TODO Switch code to get poses from the pose array
             Pose lastPose = getPose(animationlastID, poseArray);
@@ -190,7 +180,7 @@ public class DBZAnimator {
                     // Old format    if(locData.has("rightArmUpper")){animPosePart(modelBiped.bipedRightArmUpper, locData.getJSONObject("rightArmUpper"), animLength - animationTick, animLength);}
                 }
             } else {
-               // NarutoMod.LOGGER.error("PoseData not found for: " + animationID);
+                DragonBallZMod.LOGGER.error("PoseData not found for: " + animationID);
                 throw new NullPointerException("PoseData not found for: " + animationID + ". Either the data is missing or an there is something wrong.");
             }
         } else if (!animationlastID.equals("default")) {
@@ -199,7 +189,6 @@ public class DBZAnimator {
                 //JSONObject lastPoseInfo = poses.getJSONObject(animationlastID);
                 //JSONObject locData = lastPoseInfo.getJSONObject("locData");
 
-
                 for (AnimModelRenderer part : animatedParts) {
                     PartData partData = getPart(part.boxName, lastPose.partData);
                     setPosePart(part, partData);
@@ -207,12 +196,14 @@ public class DBZAnimator {
 
                 // Old format    if(locData.has("rightArmUpper")){setPosePart(modelBiped.bipedRightArmUpper, locData.getJSONObject("rightArmUpper"));}
             } else {
-               // NarutoMod.LOGGER.error("PoseData not found for: " + animationID);
+                DragonBallZMod.LOGGER.error("PoseData not found for: " + animationID);
                 throw new NullPointerException("PoseData not found for: " + animationID + ". Either the data is missing or an there is something wrong.");
             }
         }
 
+
         if (!animationID.equals("default")) { // add animation to default too!
+
             Pose currentPose = getPose(animationID, poseArray);
             if (currentPose != null) {
                 //JSONObject poseInfo = poses.getJSONObject(animationID);
@@ -236,7 +227,7 @@ public class DBZAnimator {
                     // Old format    if(locData.has("rightArmUpper")){setPosePart(modelBiped.bipedRightArmUpper, locData.getJSONObject("rightArmUpper"));}
                 }
             } else {
-              //  NarutoMod.LOGGER.error("PoseData not found for: " + animationID);
+                //  NarutoMod.LOGGER.error("PoseData not found for: " + animationID);
                 throw new NullPointerException("PoseData not found for: " + animationID + ". Either the data is missing or an there is something wrong.");
             }
         }
@@ -379,7 +370,7 @@ public class DBZAnimator {
         Pose pose = getPose(animationID, poseArray);
         if (pose != null) {
             if (pose.nextPose != null) {
-              PacketAnimationUpdate.animationUpdate(pose.nextPose, playerMP);
+                PacketAnimationUpdate.animationUpdate(pose.nextPose, playerMP);
             }
             if (pose.completeAction != 0) {
 
@@ -391,7 +382,7 @@ public class DBZAnimator {
                     ex.printStackTrace();
                 }
 
-              //  PacketDispatcher.sendPacketToServer(new ServerJutsuPacket(bos.toByteArray()));
+                //  PacketDispatcher.sendPacketToServer(new ServerJutsuPacket(bos.toByteArray()));
 
             }
         }
@@ -404,7 +395,7 @@ public class DBZAnimator {
             String json = readJSONFileStream(filestreamJson);
             poseFile = new JSONObject(json);
             poseData = poseFile.getJSONObject("poses");
-           // NarutoMod.LOGGER.info(poseFile.getNames("poses"));
+            DragonBallZMod.LOGGER.info(poseFile.getNames("poses"));
             String[] poseNames = JSONObject.getNames(poseData);
 
             Pose[] oldPoses = poseArray;
@@ -421,7 +412,7 @@ public class DBZAnimator {
 
                 String currentPoseName = poseNames[i - oldPoses.length];
 
-               // NarutoMod.LOGGER.info("Adding pose: " + currentPoseName);
+                DragonBallZMod.LOGGER.info("Adding pose: " + currentPoseName);
 
                 JSONObject poseInfo = poseData.getJSONObject(currentPoseName);
 
@@ -434,7 +425,7 @@ public class DBZAnimator {
                     // body parts
                     //NarutoMod.LOGGER.info("Pose data: " + positionNames[n]);
                     JSONObject partData = locData.getJSONObject(positionNames[n]);
-                  //  NarutoMod.LOGGER.info(positionNames[n]);
+                    //  NarutoMod.LOGGER.info(positionNames[n]);
                     //String[] partNames = poseFile.getNames(partData);
 
                     PartData currentPart = new PartData(positionNames[n]);
@@ -486,20 +477,11 @@ public class DBZAnimator {
             }
 
         } catch (IOException e) {
-           // NarutoMod.LOGGER.error("Error loading poseData");
+            DragonBallZMod.LOGGER.error("Error loading poseData");
             e.printStackTrace();
         }
 
         poseArray = sortAnimations(poseArray);
-
-
-        /**for(Pose pose: poseArray){
-         System.out.println(pose.poseName);
-         }
-         System.out.println("");
-         System.out.println("-----------------------------------");
-         System.out.println("");
-         System.out.println(getPose("chakraCharging",poseArray));*/
 
         return poseArray;
     }

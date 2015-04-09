@@ -219,20 +219,19 @@ public class EntityFlyingNimbus extends Entity {
          }*/
         if(this.worldObj.isRemote) {
             for (int i = 0; i < 15; i++) {
-                double particleX = Math.random() * 1.5 - 0.75;
-                double particleY = (Math.random()) * 0.5 - 0.2F;
-                double particleZ = Math.random() * 1.5 - 0.75;
-                double multi = 10D;
-                Particles.addParticle(Particle.COLOURED_SMOKE, this.worldObj, posX + particleX - motionX * multi, posY + particleY - motionY * multi, posZ + particleZ - motionZ * multi, 0, 0, 0, 1F, 1F, 0.0F);
+                float particleX = (float) Math.random() * 1.5F - 0.75F;
+                float particleY = (float) (Math.random()) * 0.5F - 0.2F;
+                float particleZ = (float) Math.random() * 1.5F - 0.75F;
+                //Particles.addParticle(Particle.COLOURED_SMOKE, this.worldObj, posX + particleX - motionX * multi, posY + particleY - motionY * multi, posZ + particleZ - motionZ * multi, 0, 0, 0, 1F, 1F, 0.0F);
+                Particles.addTrackingParticle(Particle.COLOURED_SMOKE, this.worldObj, posX + particleX, posY + particleY, posZ + particleZ - motionZ, this, particleX, particleY, particleZ, 1F, 1F, 0.0F);
 
             }
 
             for (int i = 0; i < 6; i++) {
-                double particleX = Math.random() * 1.5 - 0.75;
-                double particleY = (Math.random()) * 0.5 - 0.2F;
-                double particleZ = Math.random() * 1.5 - 0.75;
-                double multi = 10D;
-                Particles.addParticle(Particle.COLOURED_SMOKE, this.worldObj, posX + particleX - motionX * multi, posY + particleY - motionY * multi, posZ + particleZ - motionZ * multi, 0, 0, 0, 1F, 1F - (float) (Math.random() * 0.2F), 0.0F);
+                float particleX = (float) Math.random() * 1.5F - 0.75F;
+                float particleY = (float) (Math.random()) * 0.5F - 0.2F;
+                float particleZ = (float) Math.random() * 1.5F - 0.75F;
+                Particles.addTrackingParticle(Particle.COLOURED_SMOKE, this.worldObj, posX + particleX - motionX, posY + particleY - motionY , posZ + particleZ - motionZ, this, particleX, particleY, particleZ, 1F, 1F - (float) (Math.random() * 0.2F), 0.0F);
             }
         }
 

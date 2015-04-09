@@ -1,5 +1,6 @@
 package com.dragonballzmod.player.extendedproperties;
 
+import com.dragonballzmod.DragonBallZMod;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -51,7 +52,7 @@ public class PlayerInfo implements IExtendedEntityProperties
     public void reloadDW() {
         player.getDataWatcher().updateObject(RACE_WATCHER, "Undefined");
 
-        System.out.println("Race: " + race);
+        DragonBallZMod.LOGGER.info("Race: " + race);
         player.getDataWatcher().updateObject(RACE_WATCHER, race);
     }
 
@@ -86,7 +87,7 @@ public class PlayerInfo implements IExtendedEntityProperties
         this.currentKi = properties.getInteger("CurrentKi");
         this.maxKi = properties.getInteger("MaxKi");
         this.reloadDW();
-        System.out.println("[Dragon Ball Z] Current Ki for player from NBT: " + this.currentKi + "/" + this.maxKi);
+        DragonBallZMod.LOGGER.info("Current Ki for player from NBT: " + this.currentKi + "/" + this.maxKi);
     }
 
     @Override

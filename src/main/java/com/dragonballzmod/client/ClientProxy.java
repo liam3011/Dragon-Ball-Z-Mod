@@ -11,17 +11,17 @@ import com.dragonballzmod.player.RenderDBZPlayer;
 import com.dragonballzmod.render.RenderFlyingNimbus;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy {
     public void registerEveryThing() {
         RenderingRegistry.registerEntityRenderingHandler(EntityFlyingNimbus.class, new RenderFlyingNimbus());
         RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderDBZPlayer());
-        MinecraftForge.EVENT_BUS.register(new PlayerRenderTickEvent());
-        MinecraftForge.EVENT_BUS.register(new PlayerClientTickEvent());
+        FMLCommonHandler.instance().bus().register(new PlayerRenderTickEvent());
+        FMLCommonHandler.instance().bus().register(new PlayerClientTickEvent());
     }
 
     public void registerCustomBlocks() {
