@@ -41,4 +41,9 @@ public class PartData {
         shouldRot[2] = hasRotZ;
     }
 
+    public void setRotationPoint(float x, float y, float z) {
+        rotationPointX = x;
+        rotationPointY = y;
+        rotationPointZ = z;
+    }
 }

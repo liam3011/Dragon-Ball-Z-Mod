@@ -36,7 +36,6 @@ public class AnimModelRenderer extends ModelRenderer {
         this.showModel = true;
         this.cubeList = new ArrayList();
         this.baseModel = p_i1172_1_;
-        p_i1172_1_.boxList.add(this);
         this.boxName = boxName;
         this.setTextureSize(p_i1172_1_.textureWidth, p_i1172_1_.textureHeight);
     }

@@ -3,6 +3,9 @@ package com.dragonballzmod.animation.dynamicplayerposes;
 import com.dragonballzmod.animation.DBZAnimator;
 import com.dragonballzmod.animation.PartData;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
 
 public class FlyingPose extends DynamicPose {
 
@@ -24,13 +27,13 @@ public class FlyingPose extends DynamicPose {
         partData = new PartData[11];
         rightArmUpper = new PartData("rightArmUpper", true, true);
         partData[0] = rightArmUpper;
-        rightArmLower = new PartData("rightArmLower", true, true);
+        rightArmLower = new PartData("rightArmLower", false, true);
         partData[1] =rightArmLower;
         leftArmUpper = new PartData("leftArmUpper", true, true);
         partData[2] = leftArmUpper;
-        leftArmLower = new PartData("leftArmLower", true, true);
+        leftArmLower = new PartData("leftArmLower", false, true);
         partData[3] = leftArmLower;
-        head = new PartData("head");
+        head = new PartData("head", true, true);
         partData[4] = head;
         upperBody = new PartData("upperBody", true, true);
         partData[5] = upperBody;
@@ -38,11 +41,11 @@ public class FlyingPose extends DynamicPose {
         partData[6] = lowerBody;
         rightLegUpper = new PartData("rightLegUpper", true, true);
         partData[7] = rightLegUpper;
-        rightLegLower = new PartData("rightLegLower", true, true);
+        rightLegLower = new PartData("rightLegLower", false, true);
         partData[8] =rightLegLower;
         leftLegUpper = new PartData("leftLegUpper", true, true);
         partData[9] = leftLegUpper;
-        leftLegLower = new PartData("leftLegLower", true, true);
+        leftLegLower = new PartData("leftLegLower", false, true);
         partData[10] = leftLegLower;
 
         partData = DBZAnimator.sortParts(partData);
@@ -53,6 +56,55 @@ public class FlyingPose extends DynamicPose {
         // TODO test and finish flying animation
         // SUCCESS ^.^ F**KING BRILLIANT JIM(there is noone on the team called jim but whatever)
         //leftArmUpper.rotateAngleY = (float) Math.random * 3F;
+
+        EntityPlayer player = (EntityPlayer) par7Entity;
+
+        float bobbing = MathHelper.cos(par3 * 0.09F + 0.2F);
+
+        rightArmUpper.setRotationPoint(-5.0F, 2.0F + par2 + bobbing, 0.0F);
+        leftArmUpper.setRotationPoint(5.0F, 2.0F + par2 + bobbing, 0.0F);
+        upperBody.setRotationPoint(0.0F, 0.0F + par2 + bobbing, 0.0F);
+        lowerBody.setRotationPoint(0F, 6F + par2 + bobbing, 0F);
+        lowerBody.setRotationPoint(0F, 6F + par2 + bobbing, 0F);
+        head.setRotationPoint(0.0F, 0.0F + par2 + bobbing, 0.0F);
+
+        leftLegUpper.setRotationPoint(2F, 12.0F + par2 + bobbing, 0.0F);
+        rightLegUpper.setRotationPoint(-2F, 12.0F + par2 + bobbing, 0.0F);
+
+        rightArmUpper.rotateAngleX = 0.1F;
+        rightArmUpper.rotateAngleZ = 0.1F;
+        leftArmUpper.rotateAngleX = 0.1F;
+        leftArmUpper.rotateAngleZ = -0.1F;
+
+        /*rightLegUpper.rotateAngleX = 0.1F;
+        rightLegUpper.rotateAngleZ = 0.1F;
+        leftLegUpper.rotateAngleX = 0.1F;
+        leftLegUpper.rotateAngleZ = -0.1F;*/
+
+        head.rotateAngleY = par4 / (180F / (float) Math.PI);
+        head.rotateAngleX = par5 / (180F / (float) Math.PI);
+
+        ItemStack itemstack = player.inventory.getCurrentItem();
+        int itemInHand = itemstack != null ? 1 : 0;
+        if(itemInHand == 1){
+            rightArmUpper.rotateAngleX -= 0.3;
+        }
+
+        leftArmLower.rotateAngleX = -MathHelper.cos(par3 * 0.09F) * 0.09F - 0.61F;
+        rightArmLower.rotateAngleX = -MathHelper.sin(par3 * 0.09F) * 0.09F - 0.61F;
+
+        rightArmUpper.rotateAngleZ += MathHelper.cos(par3 * 0.09F) * 0.09F + 0.05F;
+        leftArmUpper.rotateAngleZ -= MathHelper.cos(par3 * 0.09F) * 0.09F + 0.05F;
+        rightArmUpper.rotateAngleX += MathHelper.sin(par3 * 0.067F) * 0.09F + 0.13F;
+        leftArmUpper.rotateAngleX -= MathHelper.sin(par3 * 0.067F) * 0.09F - 0.13F;
+
+        leftLegLower.rotateAngleX = MathHelper.cos(par3 * 0.09F) * 0.09F + 0.61F;
+        rightLegLower.rotateAngleX = MathHelper.sin(par3 * 0.09F) * 0.09F + 0.61F;
+
+        rightLegUpper.rotateAngleZ -= MathHelper.cos(par3 * 0.09F) * 0.09F + 0.05F;
+        leftLegUpper.rotateAngleZ += MathHelper.cos(par3 * 0.09F) * 0.09F + 0.05F;
+        rightLegUpper.rotateAngleX -= MathHelper.sin(par3 * 0.067F) * 0.09F - 0.13F;
+        leftLegUpper.rotateAngleX += MathHelper.sin(par3 * 0.067F) * 0.09F + 0.13F;
 
     }
 }
