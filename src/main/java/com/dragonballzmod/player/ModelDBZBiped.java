@@ -381,7 +381,6 @@ public class ModelDBZBiped extends ModelBiped {
         if (this.onGround > -9990.0F) {
             f6 = this.onGround;
             this.bipedBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float) Math.PI * 2.0F) * 0.2F;
-            this.bipedLowerBody.setRotationPoint(0F, 6F, 0F);
             this.bipedLowerBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float) Math.PI * 2.0F) * 0.2F;
             this.bipedRightArmUpper.rotationPointZ = MathHelper.sin(this.bipedBody.rotateAngleY) * 5.0F;
             this.bipedRightArmUpper.rotationPointX = -MathHelper.cos(this.bipedBody.rotateAngleY) * 5.0F;
@@ -399,8 +398,6 @@ public class ModelDBZBiped extends ModelBiped {
             this.bipedRightArmUpper.rotateAngleX = (float) ((double) this.bipedRightArmUpper.rotateAngleX - ((double) f7 * 1.2D + (double) var10));
             this.bipedRightArmUpper.rotateAngleY += this.bipedBody.rotateAngleY * 2.0F;
             this.bipedRightArmUpper.rotateAngleZ = MathHelper.sin(this.onGround * (float) Math.PI) * -0.4F;
-            this.bipedRightArmUpper.setRotationPoint(-5.0F, 2.0F + par2, 0.0F);
-            this.bipedLeftArmUpper.setRotationPoint(5.0F, 2.0F + par2, 0.0F);
         }
 
         if (this.isSneak) {
@@ -533,7 +530,7 @@ public class ModelDBZBiped extends ModelBiped {
         if(this.animationID.equals(this.animationlastID)){
             Pose pose = DBZAnimator.getPose(animationID, DBZAnimator.playerPoses);
             if(pose instanceof DynamicPose){
-                ((DynamicPose) pose).updatePose(par1, par2, par3, par4, par5, par6, par7Entity);
+                ((DynamicPose) pose).updatePose(par1, par2, par3, par4, par5, par6, par7Entity, onGround);
             }
         }
         else{
