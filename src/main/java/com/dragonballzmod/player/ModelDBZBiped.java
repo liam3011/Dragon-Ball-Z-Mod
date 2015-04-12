@@ -2,10 +2,9 @@ package com.dragonballzmod.player;
 
 import com.dragonballzmod.animation.AnimModelRenderer;
 import com.dragonballzmod.animation.DBZAnimator;
-import com.dragonballzmod.animation.dynamicplayerposes.DynamicPose;
 import com.dragonballzmod.animation.Pose;
+import com.dragonballzmod.animation.dynamicplayerposes.DynamicPose;
 import com.dragonballzmod.animation.modelparts.ModelRetexturedBoxSharpBend;
-import com.dragonballzmod.client.PlayerRenderTickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
@@ -58,7 +57,6 @@ public class ModelDBZBiped extends ModelBiped {
      * Records if the player is sprinting.
      */
     public boolean isSprinting = false;
-    public boolean isChakraFocus = false;
     public boolean isThrowing = false;
     public boolean isClientThrowing = false;
     public boolean isClient = false;
@@ -74,21 +72,6 @@ public class ModelDBZBiped extends ModelBiped {
     private ModelRetexturedBoxSharpBend upperRightLegBox;
     private ModelRetexturedBoxSharpBend upperLeftLegBox;
     private ModelRetexturedBoxSharpBend lowerLeftLegBox;
-    private float rightArmBeforeX;
-    private float rightArmBeforeY;
-    private float rightArmBeforeZ;
-    private float leftArmBeforeX;
-    private float leftArmBeforeY;
-    private float leftArmBeforeZ;
-    private int animateBack;
-    // for throwing animation(and possibly bow)
-    private int animateThrowBack;
-    private float rightArmThrowBeforeX = 0;
-    private float rightArmThrowBeforeY = 0;
-    private float rightArmThrowBeforeZ = 0;
-    private float leftArmThrowBeforeX = 0;
-    private float leftArmThrowBeforeY = 0;
-    private float leftArmThrowBeforeZ = 0;
     private ArrayList<AnimModelRenderer> animatedParts = new ArrayList();
 
     public ModelDBZBiped() {
@@ -504,63 +487,6 @@ public class ModelDBZBiped extends ModelBiped {
             this.bipedRightArmUpper.rotateAngleZ = -1.2831853071795864769252867665601F;
 
             this.bipedRightArmLower.rotateAngleX = 0;
-        }
-
-        if (this.isClient) {
-            if (this.isClientThrowing) {
-
-                this.animateThrowBack = 40;
-                this.bipedRightArmUpper.rotateAngleX = this.rightArmThrowBeforeX;
-                this.bipedRightArmUpper.rotateAngleY = this.rightArmThrowBeforeY;
-                this.bipedRightArmUpper.rotateAngleZ = this.rightArmThrowBeforeZ;
-
-                if (this.bipedRightArmUpper.rotateAngleX == -(1F + (this.bipedHead.rotateAngleY / 2))) {
-                    this.bipedRightArmUpper.rotateAngleY = -(0.1F) + this.bipedHead.rotateAngleX;
-                    this.bipedRightArmUpper.rotateAngleX = -(1F + (this.bipedHead.rotateAngleY / 2));
-                    this.bipedRightArmUpper.rotateAngleZ = -1.2831853071795864769252867665601F; // was 5F
-                } else {
-                    if (PlayerRenderTickEvent.delta != 0) {
-                        int speed = PlayerRenderTickEvent.delta * 10;
-                        this.rightArmThrowBeforeX += (-(1F + (this.bipedHead.rotateAngleY / 2)) - this.rightArmThrowBeforeX) / speed;
-
-                        this.rightArmThrowBeforeY += (-(0.1F) + this.bipedHead.rotateAngleX - this.rightArmThrowBeforeY) / speed;
-
-                        this.rightArmThrowBeforeZ += (-1.2831853071795864769252867665601F - this.rightArmThrowBeforeZ) / speed;
-                    }
-                }
-            } else {
-                if (PlayerRenderTickEvent.delta != 0) {
-                    if (this.animateThrowBack-- > 30) {
-                        int speed = PlayerRenderTickEvent.delta * 10;
-
-                        this.rightArmThrowBeforeX += (-(1F + (this.bipedHead.rotateAngleY / 2)) - 2F - this.rightArmThrowBeforeX) / speed;
-
-                        this.rightArmThrowBeforeY += (-(0.1F) + this.bipedHead.rotateAngleX - this.rightArmThrowBeforeY) / speed;
-
-                        this.rightArmThrowBeforeZ += (-1.2831853071795864769252867665601F - this.rightArmThrowBeforeZ) / speed;
-
-                        this.bipedRightArmUpper.rotateAngleX = this.rightArmThrowBeforeX;
-                        this.bipedRightArmUpper.rotateAngleY = this.rightArmThrowBeforeY;
-                        this.bipedRightArmUpper.rotateAngleZ = this.rightArmThrowBeforeZ;
-                    } else if (this.animateThrowBack-- > 0) {
-                        int speed = PlayerRenderTickEvent.delta * 10;
-                        this.rightArmThrowBeforeX += (this.bipedRightArmUpper.rotateAngleX - this.rightArmThrowBeforeX) / speed;
-
-                        this.rightArmThrowBeforeY += (this.bipedRightArmUpper.rotateAngleY - this.rightArmThrowBeforeY) / speed;
-
-                        this.rightArmThrowBeforeZ += (this.bipedRightArmUpper.rotateAngleZ - this.rightArmThrowBeforeZ) / speed;
-
-                        this.bipedRightArmUpper.rotateAngleX = this.rightArmThrowBeforeX;
-                        this.bipedRightArmUpper.rotateAngleY = this.rightArmThrowBeforeY;
-                        this.bipedRightArmUpper.rotateAngleZ = this.rightArmThrowBeforeZ;
-
-                    }
-                } else if (this.animateThrowBack-- > 0) {
-                    this.bipedRightArmUpper.rotateAngleX = this.rightArmThrowBeforeX;
-                    this.bipedRightArmUpper.rotateAngleY = this.rightArmThrowBeforeY;
-                    this.bipedRightArmUpper.rotateAngleZ = this.rightArmThrowBeforeZ;
-                }
-            }
         }
 
         if (this.isSprinting) {

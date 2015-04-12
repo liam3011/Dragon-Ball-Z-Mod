@@ -4,6 +4,7 @@ import com.dragonballzmod.animation.DBZAnimator;
 import com.dragonballzmod.animation.PartData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 
@@ -75,11 +76,13 @@ public class FlyingPose extends DynamicPose {
         rightArmUpper.rotateAngleZ = 0.1F;
         leftArmUpper.rotateAngleX = 0.1F;
         leftArmUpper.rotateAngleZ = -0.1F;
+        rightArmUpper.rotateAngleY = 0F;
+        leftArmUpper.rotateAngleY = 0F;
 
-        /*rightLegUpper.rotateAngleX = 0.1F;
+        rightLegUpper.rotateAngleX = -0.1F;
         rightLegUpper.rotateAngleZ = 0.1F;
-        leftLegUpper.rotateAngleX = 0.1F;
-        leftLegUpper.rotateAngleZ = -0.1F;*/
+        leftLegUpper.rotateAngleX = -0.1F;
+        leftLegUpper.rotateAngleZ = -0.1F;
 
         head.rotateAngleY = par4 / (180F / (float) Math.PI);
         head.rotateAngleX = par5 / (180F / (float) Math.PI);
@@ -101,10 +104,31 @@ public class FlyingPose extends DynamicPose {
         leftLegLower.rotateAngleX = MathHelper.cos(par3 * 0.09F) * 0.09F + 0.61F;
         rightLegLower.rotateAngleX = MathHelper.sin(par3 * 0.09F) * 0.09F + 0.61F;
 
-        rightLegUpper.rotateAngleZ -= MathHelper.cos(par3 * 0.09F) * 0.09F + 0.05F;
-        leftLegUpper.rotateAngleZ += MathHelper.cos(par3 * 0.09F) * 0.09F + 0.05F;
+        rightLegUpper.rotateAngleZ -= MathHelper.cos(par3 * 0.09F) * 0.03F + 0.05F;
+        leftLegUpper.rotateAngleZ += MathHelper.cos(par3 * 0.09F) * 0.03F + 0.05F;
         rightLegUpper.rotateAngleX -= MathHelper.sin(par3 * 0.067F) * 0.09F - 0.13F;
         leftLegUpper.rotateAngleX += MathHelper.sin(par3 * 0.067F) * 0.09F + 0.13F;
+
+        if (itemstack != null && player.getItemInUseCount() > 0) {
+            EnumAction enumaction = itemstack.getItemUseAction();
+
+            if (enumaction == EnumAction.block) {
+                rightArmUpper.rotateAngleX -= 0.3;
+            } else if (enumaction == EnumAction.bow) {
+                rightArmUpper.rotateAngleZ = 0.0F;
+                leftArmUpper.rotateAngleZ = 0.0F;
+                rightArmUpper.rotateAngleY = -(0.1F) + head.rotateAngleY;
+                leftArmUpper.rotateAngleY = 0.1F + head.rotateAngleY + 0.4F;
+                rightArmUpper.rotateAngleX = -((float) Math.PI / 2F) + head.rotateAngleX;
+                leftArmUpper.rotateAngleX = -((float) Math.PI / 2F) + head.rotateAngleX;
+                rightArmUpper.rotateAngleZ += MathHelper.cos(par3 * 0.09F) * 0.05F + 0.05F;
+                leftArmUpper.rotateAngleZ -= MathHelper.cos(par3 * 0.09F) * 0.05F + 0.05F;
+                rightArmUpper.rotateAngleX += MathHelper.sin(par3 * 0.067F) * 0.05F;
+                leftArmUpper.rotateAngleX -= MathHelper.sin(par3 * 0.067F) * 0.05F;
+                rightArmLower.rotateAngleX = 0F;
+                leftArmLower.rotateAngleX = 0F;
+            }
+        }
 
     }
 }
