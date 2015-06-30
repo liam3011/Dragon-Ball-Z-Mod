@@ -52,11 +52,13 @@ public class FlyingPose extends DynamicPose {
         partData = DBZAnimator.sortParts(partData);
     }
 
-    public void updatePose(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
+    public void updatePose(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity, float... args) {
         // TODO add code to update the part data and all sorts
         // TODO test and finish flying animation
         // SUCCESS ^.^ F**KING BRILLIANT JIM(there is noone on the team called jim but whatever)
         //leftArmUpper.rotateAngleY = (float) Math.random * 3F;
+
+        // TODO add code to do the punching animation
 
         EntityPlayer player = (EntityPlayer) par7Entity;
 
@@ -65,7 +67,6 @@ public class FlyingPose extends DynamicPose {
         rightArmUpper.setRotationPoint(-5.0F, 2.0F + par2 + bobbing, 0.0F);
         leftArmUpper.setRotationPoint(5.0F, 2.0F + par2 + bobbing, 0.0F);
         upperBody.setRotationPoint(0.0F, 0.0F + par2 + bobbing, 0.0F);
-        lowerBody.setRotationPoint(0F, 6F + par2 + bobbing, 0F);
         lowerBody.setRotationPoint(0F, 6F + par2 + bobbing, 0F);
         head.setRotationPoint(0.0F, 0.0F + par2 + bobbing, 0.0F);
 
@@ -108,6 +109,28 @@ public class FlyingPose extends DynamicPose {
         leftLegUpper.rotateAngleZ += MathHelper.cos(par3 * 0.09F) * 0.03F + 0.05F;
         rightLegUpper.rotateAngleX -= MathHelper.sin(par3 * 0.067F) * 0.09F - 0.13F;
         leftLegUpper.rotateAngleX += MathHelper.sin(par3 * 0.067F) * 0.09F + 0.13F;
+
+        if (args[0] > -9990.0F) {
+            float f6 = args[0];
+            upperBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float) Math.PI * 2.0F) * 0.2F;
+            lowerBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float) Math.PI * 2.0F) * 0.2F;
+            rightArmUpper.rotationPointZ = MathHelper.sin(upperBody.rotateAngleY) * 5.0F;
+            rightArmUpper.rotationPointX = -MathHelper.cos(upperBody.rotateAngleY) * 5.0F;
+            leftArmUpper.rotationPointZ = -MathHelper.sin(upperBody.rotateAngleY) * 5.0F;
+            leftArmUpper.rotationPointX = MathHelper.cos(upperBody.rotateAngleY) * 5.0F;
+            rightArmUpper.rotateAngleY += upperBody.rotateAngleY;
+            leftArmUpper.rotateAngleY += upperBody.rotateAngleY;
+            leftArmUpper.rotateAngleX += upperBody.rotateAngleY;
+            f6 = 1.0F - args[0];
+            f6 *= f6;
+            f6 *= f6;
+            f6 = 1.0F - f6;
+            float f7 = MathHelper.sin(f6 * (float) Math.PI);
+            float var10 = MathHelper.sin(args[0] * (float) Math.PI) * -(head.rotateAngleX - 0.7F) * 0.75F;
+            rightArmUpper.rotateAngleX = (float) ((double) rightArmUpper.rotateAngleX - ((double) f7 * 1.2D + (double) var10));
+            rightArmUpper.rotateAngleY += upperBody.rotateAngleY * 2.0F;
+            rightArmUpper.rotateAngleZ = MathHelper.sin(args[0] * (float) Math.PI) * -0.4F;
+        }
 
         if (itemstack != null && player.getItemInUseCount() > 0) {
             EnumAction enumaction = itemstack.getItemUseAction();
