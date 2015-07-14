@@ -110,7 +110,7 @@ public class ModelDBZBiped extends ModelBiped {
         this.bipedLeftArm.mirror = true;
         this.bipedLeftArm.addBox(-1.0F, -2.0F, -2.0F, 4, 12, 4, p_i1149_1_);
         this.bipedLeftArm.setRotationPoint(5.0F, 2.0F + p_i1149_2_, 0.0F);
-        this.bipedRightLeg = new AnimModelRenderer(this, 0, 16, "rightLeg"); // TODO add lower leg
+        this.bipedRightLeg = new AnimModelRenderer(this, 0, 16, "rightLeg");
         this.bipedRightLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, p_i1149_1_);
         this.bipedRightLeg.setRotationPoint(-2F, 12.0F, 0.0F);
         this.bipedLeftLeg = new AnimModelRenderer(this, 0, 16, "leftLeg");
@@ -236,6 +236,46 @@ public class ModelDBZBiped extends ModelBiped {
      */
     public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float p_78088_7_) {
         this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, p_78088_7_, p_78088_1_);
+        GL11.glPushMatrix();
+        if(this.animationID.equals(this.animationlastID)){
+            Pose pose = DBZAnimator.getPose(animationID, DBZAnimator.playerPoses);
+            if(pose.hasRotation){
+                GL11.glRotatef(pose.rotateAngleX,1F,0,0);
+                GL11.glRotatef(pose.rotateAngleY,0,1F,0);
+                GL11.glRotatef(pose.rotateAngleZ,0,0,1F);
+            }
+        }
+        else {
+            float rotationX = 0;
+            float rotationY = 0;
+            float rotationZ = 0;
+
+            Pose lastPose = DBZAnimator.getPose(animationlastID, DBZAnimator.playerPoses);
+            if(lastPose.hasRotation){
+                rotationX = lastPose.rotateAngleX;
+                rotationY = lastPose.rotateAngleY;
+                rotationZ = lastPose.rotateAngleZ;
+            }
+
+            Pose pose = DBZAnimator.getPose(animationID, DBZAnimator.playerPoses);
+            if(pose.hasRotation){
+                rotationX -= ((rotationX - pose.rotateAngleX) / (float) pose.animLength) * (float) animationTick;
+                rotationY -= ((rotationY - pose.rotateAngleY) / (float) pose.animLength) * (float) animationTick;
+                rotationZ -= ((rotationZ - pose.rotateAngleZ) / (float) pose.animLength) * (float) animationTick;
+            }
+
+
+            if(!pose.hasRotation && lastPose.hasRotation){
+                rotationX = (lastPose.rotateAngleX / (float) pose.animLength) * (float)(pose.animLength - animationTick);
+                rotationY = (lastPose.rotateAngleY / (float) pose.animLength) * (float)(pose.animLength - animationTick);
+                rotationZ = (lastPose.rotateAngleZ / (float) pose.animLength) * (float)(pose.animLength - animationTick);
+            }
+
+            GL11.glRotatef(rotationX,1F,0,0);
+            GL11.glRotatef(rotationY,0,1F,0);
+            GL11.glRotatef(rotationZ,0,0,1F);
+        }
+
 
         if (this.isChild) {
             float var8 = 2.0F;
@@ -279,6 +319,7 @@ public class ModelDBZBiped extends ModelBiped {
 
             this.bipedLeftLegUpper.render(p_78088_7_);
         }
+        GL11.glPopMatrix();
     }
 
     /**
@@ -343,6 +384,7 @@ public class ModelDBZBiped extends ModelBiped {
 
         this.bipedHead.rotateAngleY = par4 / (180F / (float) Math.PI);
         this.bipedHead.rotateAngleX = par5 / (180F / (float) Math.PI);
+        this.bipedHead.rotateAngleZ = 0;
         this.bipedHeadwear.rotateAngleY = this.bipedHead.rotateAngleY;
         this.bipedHeadwear.rotateAngleX = this.bipedHead.rotateAngleX;
         this.bipedRightArmUpper.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 2.0F * par2 * 0.5F;
@@ -381,6 +423,7 @@ public class ModelDBZBiped extends ModelBiped {
         if (this.onGround > -9990.0F) {
             f6 = this.onGround;
             this.bipedBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float) Math.PI * 2.0F) * 0.2F;
+            this.bipedLowerBody.setRotationPoint(0F, 6F, 0F);
             this.bipedLowerBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float) Math.PI * 2.0F) * 0.2F;
             this.bipedRightArmUpper.rotationPointZ = MathHelper.sin(this.bipedBody.rotateAngleY) * 5.0F;
             this.bipedRightArmUpper.rotationPointX = -MathHelper.cos(this.bipedBody.rotateAngleY) * 5.0F;
@@ -398,6 +441,8 @@ public class ModelDBZBiped extends ModelBiped {
             this.bipedRightArmUpper.rotateAngleX = (float) ((double) this.bipedRightArmUpper.rotateAngleX - ((double) f7 * 1.2D + (double) var10));
             this.bipedRightArmUpper.rotateAngleY += this.bipedBody.rotateAngleY * 2.0F;
             this.bipedRightArmUpper.rotateAngleZ = MathHelper.sin(this.onGround * (float) Math.PI) * -0.4F;
+            this.bipedRightArmUpper.setRotationPoint(-5.0F, 2.0F + par2, 0.0F);
+            this.bipedLeftArmUpper.setRotationPoint(5.0F, 2.0F + par2, 0.0F);
         }
 
         if (this.isSneak) {
@@ -442,7 +487,7 @@ public class ModelDBZBiped extends ModelBiped {
             this.bipedLowerBody.setRotationPoint(0F, 6F + par2, 0F);
             this.bipedRightLegUpper.setRotationPoint(-2F, 12.0F + par2, 0.0F);
             this.bipedLeftLegUpper.setRotationPoint(2F, 12.0F + par2, 0.0F);
-            
+
             this.bipedRightArmLower.rotateAngleX = MathHelper.cos(par1 * 0.6662F + (float) Math.PI) * 0.4F * par2 * 0.4F;
             this.bipedLeftArmLower.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 0.4F * par2 * 0.4F;
         }
@@ -536,11 +581,11 @@ public class ModelDBZBiped extends ModelBiped {
         else{
             Pose pose = DBZAnimator.getPose(animationID, DBZAnimator.playerPoses);
             if(pose instanceof DynamicPose){
-                ((DynamicPose) pose).updatePose(par1, par2, par3, par4, par5, par6, par7Entity);
+                ((DynamicPose) pose).updatePose(par1, par2, par3, par4, par5, par6, par7Entity, onGround);
             }
             Pose lastPose = DBZAnimator.getPose(animationlastID, DBZAnimator.playerPoses);
             if(lastPose instanceof DynamicPose){
-                ((DynamicPose) lastPose).updatePose(par1, par2, par3, par4, par5, par6, par7Entity);
+                ((DynamicPose) lastPose).updatePose(par1, par2, par3, par4, par5, par6, par7Entity, onGround);
             }
         }
 

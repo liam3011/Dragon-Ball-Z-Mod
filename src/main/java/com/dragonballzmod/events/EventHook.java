@@ -1,9 +1,7 @@
 package com.dragonballzmod.events;
 
 import com.dragonballzmod.player.extendedproperties.PlayerInfo;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,21 +17,21 @@ public class EventHook {
     public void handleConstruction(EntityConstructing event) {
         if (event.entity instanceof EntityPlayer) {
             DataWatcher dw = event.entity.getDataWatcher();
-            dw.addObject(20, "default"); // jutsu pose id (such as charging)
+            dw.addObject(20, "default"); // pose id (such as charging)
             dw.addObject(21, "None"); // player's race
             // 22-24 are free atm, may need to shift all values if you want it to work with the naruto mod, or just have an extra one which is saying if
             //  its a ninja or squishysaiyan
             dw.addObject(25, 0); // animationTick (used to add smooth animation for players to different poses, is currently edited by the client :P)
             dw.addObject(26, "default"); // lastpose (so the smooth animation works between poses)
-            dw.addObject(27, "default"); // lastposeClient (the last pose the client updated(so it can change the animationTick back to 0))
+            dw.addObject(27, "default"); // poseClient (the last pose the client updated(so it can change the animationTick back to 0))
             //dw.addObject(27, 0); // could also possibly add a kunai throw tick.
 
             event.entity.registerExtendedProperties(PlayerInfo.IDENTIFIER, new PlayerInfo((EntityPlayer) event.entity));
 
-            Side side = FMLCommonHandler.instance().getEffectiveSide();
+            /*Side side = FMLCommonHandler.instance().getEffectiveSide();
             if (side == Side.CLIENT) {
                 event.entity.getEntityData().setString("lastposeClient", "default"); // this stores the last pose for the client but only client side
-            }
+            }*/
 
 
 

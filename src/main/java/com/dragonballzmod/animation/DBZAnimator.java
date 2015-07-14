@@ -163,7 +163,6 @@ public class DBZAnimator {
 
     public static void animate(String animationID, String animationlastID, int animationTick, ArrayList<AnimModelRenderer> animatedParts, Pose[] poseArray) {
 
-
         if (animationID.equals("default") && !animationlastID.equals("default")) { // add animation to default too!
             // TODO Switch code to get poses from the pose array
             Pose lastPose = getPose(animationlastID, poseArray);
@@ -203,7 +202,6 @@ public class DBZAnimator {
 
 
         if (!animationID.equals("default")) { // add animation to default too!
-
             Pose currentPose = getPose(animationID, poseArray);
             if (currentPose != null) {
                 //JSONObject poseInfo = poses.getJSONObject(animationID);

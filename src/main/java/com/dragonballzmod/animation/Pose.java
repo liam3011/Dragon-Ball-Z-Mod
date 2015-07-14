@@ -13,6 +13,12 @@ public class Pose {
 
     public PartData[] partData;
 
+    public boolean hasRotation = false;
+
+    public float rotateAngleX = 0;
+    public float rotateAngleY = 0;
+    public float rotateAngleZ = 0;
+
     public Pose(String poseName) {
         this.poseName = poseName;
     }
