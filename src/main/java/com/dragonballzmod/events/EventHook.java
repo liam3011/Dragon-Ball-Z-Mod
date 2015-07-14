@@ -27,7 +27,7 @@ public class EventHook {
             //dw.addObject(27, 0); // could also possibly add a kunai throw tick.
 
             event.entity.registerExtendedProperties(PlayerInfo.IDENTIFIER, new PlayerInfo((EntityPlayer) event.entity));
-
+            /// blah blah blab could be usefull code
             /*Side side = FMLCommonHandler.instance().getEffectiveSide();
             if (side == Side.CLIENT) {
                 event.entity.getEntityData().setString("lastposeClient", "default"); // this stores the last pose for the client but only client side
