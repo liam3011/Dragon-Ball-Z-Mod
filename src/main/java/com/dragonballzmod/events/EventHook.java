@@ -28,6 +28,11 @@ public class EventHook {
 
             event.entity.registerExtendedProperties(PlayerInfo.IDENTIFIER, new PlayerInfo((EntityPlayer) event.entity));
             /// blah blah blab could be usefull code
+            // gawijaiidjawdwa
+            // agawgewgwaegawegweagwaega
+            //a awgwaegweagwa egaweg waege
+            //g awgewegweag aweg waeg waeg
+            //aw wea wegawegawegawegaweg
             /*Side side = FMLCommonHandler.instance().getEffectiveSide();
             if (side == Side.CLIENT) {
                 event.entity.getEntityData().setString("lastposeClient", "default"); // this stores the last pose for the client but only client side
