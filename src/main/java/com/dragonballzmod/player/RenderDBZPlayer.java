@@ -238,7 +238,7 @@ public class RenderDBZPlayer extends RenderPlayer {
         }
 
 
-        this.modelArmorChestplate.animationID = this.modelArmor.animationID = this.modelBipedMain.animationID = dw.getWatchableObjectString(20);
+        this.modelArmorChestplate.animationID = this.modelArmor.animationID = this.modelBipedMain.animationID = dw.getWatchableObjectString(27);
         this.modelArmorChestplate.animationlastID = this.modelArmor.animationlastID = this.modelBipedMain.animationlastID = dw.getWatchableObjectString(26);
         this.modelArmorChestplate.animationTick = this.modelArmor.animationTick = this.modelBipedMain.animationTick = dw.getWatchableObjectInt(25);
 

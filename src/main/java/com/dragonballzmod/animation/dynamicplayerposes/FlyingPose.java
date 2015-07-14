@@ -49,6 +49,12 @@ public class FlyingPose extends DynamicPose {
         leftLegLower = new PartData("leftLegLower", false, true);
         partData[10] = leftLegLower;
 
+        hasRotation = true;
+
+        rotateAngleX = 90;
+        rotateAngleY = 0;
+        rotateAngleZ = 0;
+
         partData = DBZAnimator.sortParts(partData);
     }
 
@@ -61,6 +67,16 @@ public class FlyingPose extends DynamicPose {
         // TODO add code to do the punching animation
 
         EntityPlayer player = (EntityPlayer) par7Entity;
+
+        double xSpeed = player.posX - player.prevPosX;
+        double ySpeed = player.posY - player.prevPosY;
+        double zSpeed = player.posY - player.prevPosZ;
+
+        //System.out.println(par2);
+
+        double speed = Math.sqrt(Math.pow(xSpeed,2) + Math.pow(ySpeed,2) + Math.pow(zSpeed,2));
+
+        //System.out.println(speed);
 
         float bobbing = MathHelper.cos(par3 * 0.09F + 0.2F);
 
@@ -85,8 +101,24 @@ public class FlyingPose extends DynamicPose {
         leftLegUpper.rotateAngleX = -0.1F;
         leftLegUpper.rotateAngleZ = -0.1F;
 
-        head.rotateAngleY = par4 / (180F / (float) Math.PI);
-        head.rotateAngleX = par5 / (180F / (float) Math.PI);
+        float headAngleChange = par2;
+
+        if(headAngleChange > 1F){
+            headAngleChange = 1F;
+        }
+        else if(headAngleChange < 0F){
+            headAngleChange = 0F;
+        }
+
+        head.rotateAngleY = par4 / (180F / (float) Math.PI) * (1F - headAngleChange);
+        head.rotateAngleX = par5 / (180F / (float) Math.PI) * (1F - headAngleChange);
+
+        head.rotateAngleY += 0;
+        head.rotateAngleX -= 1.0F * headAngleChange + par4 / (180F / (float) Math.PI) * 0.1F;
+
+        head.rotateAngleZ = par4 / (180F / (float) Math.PI) * -headAngleChange;
+
+        rotateAngleX = 70 * headAngleChange;
 
         ItemStack itemstack = player.inventory.getCurrentItem();
         int itemInHand = itemstack != null ? 1 : 0;
@@ -110,7 +142,17 @@ public class FlyingPose extends DynamicPose {
         rightLegUpper.rotateAngleX -= MathHelper.sin(par3 * 0.067F) * 0.09F - 0.13F;
         leftLegUpper.rotateAngleX += MathHelper.sin(par3 * 0.067F) * 0.09F + 0.13F;
 
-        if (args[0] > -9990.0F) {
+        leftLegLower.rotateAngleX *= (1 - headAngleChange);
+
+        leftLegUpper.rotateAngleX = (leftLegUpper.rotateAngleX * (1 - headAngleChange)) + headAngleChange * 0.2F;
+
+        rightLegLower.rotateAngleX = (rightLegLower.rotateAngleX * (1 - headAngleChange)) + (headAngleChange * 0.9F);
+
+        rightLegUpper.rotateAngleX = (rightLegUpper.rotateAngleX * (1 - headAngleChange)) + (headAngleChange * -0.4F);
+
+
+
+        /*if (args[0] > -9990.0F) {
             float f6 = args[0];
             upperBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float) Math.PI * 2.0F) * 0.2F;
             lowerBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt_float(f6) * (float) Math.PI * 2.0F) * 0.2F;
@@ -130,7 +172,7 @@ public class FlyingPose extends DynamicPose {
             rightArmUpper.rotateAngleX = (float) ((double) rightArmUpper.rotateAngleX - ((double) f7 * 1.2D + (double) var10));
             rightArmUpper.rotateAngleY += upperBody.rotateAngleY * 2.0F;
             rightArmUpper.rotateAngleZ = MathHelper.sin(args[0] * (float) Math.PI) * -0.4F;
-        }
+        }*/
 
         if (itemstack != null && player.getItemInUseCount() > 0) {
             EnumAction enumaction = itemstack.getItemUseAction();
