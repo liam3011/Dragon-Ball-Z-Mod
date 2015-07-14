@@ -18,6 +18,7 @@ import net.minecraft.util.IIcon;
 /**
  * Created by liam on 01/02/2015.
  */
+
 public class itemBattleArmorChest1 extends ItemArmor {
 
     @SideOnly(Side.CLIENT)
@@ -37,7 +38,7 @@ public class itemBattleArmorChest1 extends ItemArmor {
 
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-        return DragonBallZMod.modid + ":textures/armour/battleArmor.png";
+        return "textures/armour/battleArmor.png";
     }
 
     @Override

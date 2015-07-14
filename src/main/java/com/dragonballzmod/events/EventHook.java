@@ -68,6 +68,6 @@ public class EventHook {
     @SubscribeEvent
     public void playerPunch(AttackEntityEvent event) {
         EntityLivingBase attackedEntity = event.entityLiving;
-        event.target.attackEntityFrom(new EntityDamageSource("player", event.entityPlayer), 20);
+        event.target.attackEntityFrom(new EntityDamageSource("player", event.entityPlayer), 1);
     }
 }

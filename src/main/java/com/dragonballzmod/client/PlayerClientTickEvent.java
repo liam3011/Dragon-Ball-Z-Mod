@@ -19,13 +19,13 @@ public class PlayerClientTickEvent {
 
     public static int JutsuKeyDelay = 0;
 
-    /*public static float chakra = 100;
-    public static float maxChakra = 100;
-    public static int chakraCooldown;*/
-    public static boolean isChakraFocus;
+    public static float chi = 100;
+    public static float maxChi = 100;
+    public static int ChiCooldown;
+    public static boolean isChiFocus;
     public static String jutsuPoseID = "default"; // finish this so it is set by the different jutsu, for chakra charge it when its turned off and on. and for other jutsus set a delay untill its changed back
-    private static boolean ChakraCharge = false;
-    private static int ChakraChargeDelay = 20;
+    private static boolean ChiCharge = false;
+    private static int ChiChargeDelay = 20;
     private static double lastX;
     private static double lastY;
     private static double lastZ;
@@ -53,7 +53,7 @@ public class PlayerClientTickEvent {
         if (guiscreen == null || guiscreen instanceof GuiInventory || guiscreen instanceof GuiChat) {
 
 
-            boolean ChakraFocus = false;
+            boolean ChiFocus = false;
 
             EntityClientPlayerMP playerMP = FMLClientHandler.instance().getClient().thePlayer;
 
