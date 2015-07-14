@@ -28,6 +28,8 @@ public class EventHook {
 
             event.entity.registerExtendedProperties(PlayerInfo.IDENTIFIER, new PlayerInfo((EntityPlayer) event.entity));
             /// blah blah blab could be usefull code
+            //yooooooooooooooooooooooo what the fuck is this mate oh my god goood lord holu MOTSHJATSINOAHNISFOJNSOAKNLDM<KKSAMGSIAHIOPHGSIMIKSM
+            //I am the god of destruction lord beerus!
             /*Side side = FMLCommonHandler.instance().getEffectiveSide();
             if (side == Side.CLIENT) {
                 event.entity.getEntityData().setString("lastposeClient", "default"); // this stores the last pose for the client but only client side
@@ -68,6 +70,6 @@ public class EventHook {
     @SubscribeEvent
     public void playerPunch(AttackEntityEvent event) {
         EntityLivingBase attackedEntity = event.entityLiving;
-        event.target.attackEntityFrom(new EntityDamageSource("player", event.entityPlayer), 1);
+        event.target.attackEntityFrom(new EntityDamageSource("player", event.entityPlayer), 20);
     }
 }

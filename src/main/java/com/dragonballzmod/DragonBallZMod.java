@@ -86,7 +86,7 @@ public class DragonBallZMod {
 
         InputStream fileStreamJson = DragonBallZMod.class.getResourceAsStream("/assets/dragonballzmod/mod/poseData.json");
         entityAnimator.playerPoses = entityAnimator.addPoses(fileStreamJson, entityAnimator.playerPoses);
-        
+
         MinecraftForge.EVENT_BUS.register(new EventHook());
         DragonBallZBlocks.addBlocks();
         DragonBallZItems.addItems();
