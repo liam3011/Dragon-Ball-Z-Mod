@@ -38,7 +38,7 @@ public class itemBattleArmorChest1 extends ItemArmor {
 
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-        return "textures/armour/battleArmor.png";
+        return "dragonballzmod:textures/armor/modelBattleArmor1Texture.png";
     }
 
     @Override
