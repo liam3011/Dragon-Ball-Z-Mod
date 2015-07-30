@@ -4,9 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-/**
- * Created by liam on 14/07/2015.
- */
+
 public class shenronModel extends ModelBase
 
     {

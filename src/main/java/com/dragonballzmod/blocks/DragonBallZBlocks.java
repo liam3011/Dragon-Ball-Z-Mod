@@ -26,7 +26,8 @@ public class DragonBallZBlocks {
     public static Block blockDragonBall5;
     public static Block blockDragonBall6;
     public static Block blockDragonBall7;
-//    public static Block blockNamekianDiamond;
+    public static Block blockNamekianDiamondOre;
+    public static Block blockNamekianGoldOre;
     public static Block blockTempPortal;
 
     public static void addBlocks() {
@@ -36,7 +37,7 @@ public class DragonBallZBlocks {
         blockNamekianGrass = new BlockNamekianGrass().setBlockName("blockNamekianGrass");
         blockNamekianMarble = new BlockNamekianMarble().setBlockName("blockNamekianMarble");
         blockNamekianCoalOre = new BlockNamekianCoalOre().setBlockName("blockNamekianCoalOre");
-        blockNamekianIronOre = new BlockNamekianIronOre().setBlockName("blockNamekianCoalOre");
+        blockNamekianIronOre = new BlockNamekianIronOre().setBlockName("blockNamekianIronOre");
         blockNamekianSand = new BlockNamekianSand().setBlockName("blockNamekianSand");
         blockTintGlass = new BlockTintGlass(Material.glass, false);
         blockDoomDiamondOre = new BlockDoomDiamondOre().setBlockName("blockDoomDiamondOre");
@@ -48,7 +49,8 @@ public class DragonBallZBlocks {
         blockDragonBall5 = new BlockDragonBall(5).setBlockName("blockDragonBall5");
         blockDragonBall6 = new BlockDragonBall(6).setBlockName("blockDragonBall6");
         blockDragonBall7 = new BlockDragonBall(7).setBlockName("blockDragonBall7");
-      //  blockNamekianDiamond = new BlockNamekianDiamond().setBlockName("blockNamekianDiamond");
+        blockNamekianDiamondOre = new BlockNamekianDiamondOre().setBlockName("blockNamekianDiamondOre");
+        blockNamekianGoldOre = new BlockNamekianGoldOre().setBlockName("blockNamekianGoldOre");
       //  blockTempPortal = new BlockTempPortal().setBlockName("blockTempPortal");
 
 
@@ -58,6 +60,7 @@ public class DragonBallZBlocks {
         RegisterHelper.registerBlock(blockNamekianGrass);
         RegisterHelper.registerBlock(blockNamekianMarble);
         RegisterHelper.registerBlock(blockNamekianCoalOre);
+        RegisterHelper.registerBlock(blockNamekianIronOre);
         RegisterHelper.registerBlock(blockNamekianSand);
         RegisterHelper.registerBlock(blockTintGlass);
         RegisterHelper.registerBlock(blockDoomDiamondOre);
@@ -69,11 +72,14 @@ public class DragonBallZBlocks {
         RegisterHelper.registerBlock(blockDragonBall5);
         RegisterHelper.registerBlock(blockDragonBall6);
         RegisterHelper.registerBlock(blockDragonBall7);
-      //  RegisterHelper.registerBlock(blockNamekianDiamond);
+        RegisterHelper.registerBlock(blockNamekianDiamondOre);
+        RegisterHelper.registerBlock(blockNamekianGoldOre);
+
       //  RegisterHelper.registerBlock(blockTempPortal);
 
         //Recipes
         GameRegistry.addSmelting(blockNamekianIronOre, new ItemStack(Items.iron_ingot), 20F);
+        GameRegistry.addSmelting(blockNamekianGoldOre, new ItemStack(Items.gold_ingot), 20F);
     }
 
 }
