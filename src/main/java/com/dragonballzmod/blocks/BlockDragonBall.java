@@ -35,7 +35,8 @@ public class BlockDragonBall extends BlockContainer {
         super(Material.plants);
         this.stars = stars;
         setCreativeTab(DragonBallZMod.dbTab);
-        this.setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 0.6F, 0.8F);
+        //this.setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 0.6F, 0.8F);
+        this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.5F, 0.75F);
         this.setLightLevel(0.4F);
         this.setLightOpacity((int) 0F);
         createStackedBlock(1);

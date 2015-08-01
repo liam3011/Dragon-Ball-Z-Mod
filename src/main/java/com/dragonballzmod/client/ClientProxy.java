@@ -1,8 +1,10 @@
 package com.dragonballzmod.client;
 
 
+import com.dragonballzmod.blocks.BlockThinTree;
 import com.dragonballzmod.blocks.DragonBallZBlocks;
 import com.dragonballzmod.blocks.itemrenderers.ItemRendererDragonBall;
+import com.dragonballzmod.blocks.itemrenderers.ItemRendererThinTree;
 import com.dragonballzmod.blocks.renderers.TileEntityDragonBallRenderer;
 import com.dragonballzmod.blocks.tileentity.TileEntityDragonBall;
 import com.dragonballzmod.client.gui.GuiChiBar;
@@ -39,6 +41,8 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(DragonBallZBlocks.blockDragonBall5), new ItemRendererDragonBall());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(DragonBallZBlocks.blockDragonBall6), new ItemRendererDragonBall());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(DragonBallZBlocks.blockDragonBall7), new ItemRendererDragonBall());
+
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(DragonBallZBlocks.blockThinTree), new ItemRendererThinTree());
     }
 
     public void addInGameGUIs()
