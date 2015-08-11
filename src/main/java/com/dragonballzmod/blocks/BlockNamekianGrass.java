@@ -20,7 +20,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Random;
 
-public class BlockNamekianGrass extends Block implements IGrowable {
+public class BlockNamekianGrass extends Block implements IGrowable
+{
     private static final Logger logger = LogManager.getLogger();
     private static final String __OBFID = "CL_00000251";
     @SideOnly(Side.CLIENT)
@@ -30,10 +31,10 @@ public class BlockNamekianGrass extends Block implements IGrowable {
     @SideOnly(Side.CLIENT)
     private IIcon field_149994_N;
 
-    public BlockNamekianGrass() {
+    public BlockNamekianGrass()
+    {
         super(Material.grass);
         this.setTickRandomly(true);
-        //this.setCreativeTab(CreativeTabs.tabBlock);
         this.setStepSound(soundTypeGrass);
         this.setHardness(0.5F);
         this.setHarvestLevel("shovel", 1);
@@ -41,29 +42,35 @@ public class BlockNamekianGrass extends Block implements IGrowable {
         setBlockTextureName(DragonBallZMod.modid + ":" + "blockNamekianGrass");
     }
 
-    /**
-     * Gets the block's texture. Args: side, meta
-     */
+    //Gets the block's texture. Args: side, meta
+
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int p_149691_1_, int p_149691_2_) {
+    public IIcon getIcon(int p_149691_1_, int p_149691_2_)
+    {
         return p_149691_1_ == 1 ? this.field_149991_b : (p_149691_1_ == 0 ? DragonBallZBlocks.blockNamekianSoil.getBlockTextureFromSide(p_149691_1_) : this.blockIcon);
     }
 
-    /**
-     * Ticks the block if it's been scheduled
-     */
-    public void updateTick(World p_149674_1_, int p_149674_2_, int p_149674_3_, int p_149674_4_, Random p_149674_5_) {
-        if (!p_149674_1_.isRemote) {
-            if (p_149674_1_.getBlockLightValue(p_149674_2_, p_149674_3_ + 1, p_149674_4_) < 4 && p_149674_1_.getBlockLightOpacity(p_149674_2_, p_149674_3_ + 1, p_149674_4_) > 2) {
+    //Ticks the block if it's been scheduled
+
+    public void updateTick(World p_149674_1_, int p_149674_2_, int p_149674_3_, int p_149674_4_, Random p_149674_5_)
+    {
+        if (!p_149674_1_.isRemote)
+        {
+            if (p_149674_1_.getBlockLightValue(p_149674_2_, p_149674_3_ + 1, p_149674_4_) < 4 && p_149674_1_.getBlockLightOpacity(p_149674_2_, p_149674_3_ + 1, p_149674_4_) > 2)
+            {
                 p_149674_1_.setBlock(p_149674_2_, p_149674_3_, p_149674_4_, DragonBallZBlocks.blockNamekianSoil);
-            } else if (p_149674_1_.getBlockLightValue(p_149674_2_, p_149674_3_ + 1, p_149674_4_) >= 9) {
-                for (int l = 0; l < 4; ++l) {
+            }
+            else if (p_149674_1_.getBlockLightValue(p_149674_2_, p_149674_3_ + 1, p_149674_4_) >= 9)
+            {
+                for (int l = 0; l < 4; ++l)
+                {
                     int i1 = p_149674_2_ + p_149674_5_.nextInt(3) - 1;
                     int j1 = p_149674_3_ + p_149674_5_.nextInt(5) - 3;
                     int k1 = p_149674_4_ + p_149674_5_.nextInt(3) - 1;
                     Block block = p_149674_1_.getBlock(i1, j1 + 1, k1);
 
-                    if (p_149674_1_.getBlock(i1, j1, k1) == DragonBallZBlocks.blockNamekianSoil && p_149674_1_.getBlockMetadata(i1, j1, k1) == 0 && p_149674_1_.getBlockLightValue(i1, j1 + 1, k1) >= 4 && p_149674_1_.getBlockLightOpacity(i1, j1 + 1, k1) <= 2) {
+                    if (p_149674_1_.getBlock(i1, j1, k1) == DragonBallZBlocks.blockNamekianSoil && p_149674_1_.getBlockMetadata(i1, j1, k1) == 0 && p_149674_1_.getBlockLightValue(i1, j1 + 1, k1) >= 4 && p_149674_1_.getBlockLightOpacity(i1, j1 + 1, k1) <= 2)
+                    {
                         p_149674_1_.setBlock(i1, j1, k1, DragonBallZBlocks.blockNamekianGrass);
                     }
                 }
@@ -71,20 +78,24 @@ public class BlockNamekianGrass extends Block implements IGrowable {
         }
     }
 
-    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
+    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
+    {
         return DragonBallZBlocks.blockNamekianSoil.getItemDropped(0, p_149650_2_, p_149650_3_);
     }
 
-    public boolean func_149851_a(World p_149851_1_, int p_149851_2_, int p_149851_3_, int p_149851_4_, boolean p_149851_5_) {
+    public boolean func_149851_a(World p_149851_1_, int p_149851_2_, int p_149851_3_, int p_149851_4_, boolean p_149851_5_)
+    {
         return true;
     }
 
-    public boolean func_149852_a(World p_149852_1_, Random p_149852_2_, int p_149852_3_, int p_149852_4_, int p_149852_5_) {
+    public boolean func_149852_a(World p_149852_1_, Random p_149852_2_, int p_149852_3_, int p_149852_4_, int p_149852_5_)
+    {
         return true;
     }
 
     @Override
-    public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable) {
+    public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
+    {
         Block plant = plantable.getPlant(world, x, y + 1, z);
         EnumPlantType plantType = plantable.getPlantType(world, x, y + 1, z);
 
@@ -97,19 +108,25 @@ public class BlockNamekianGrass extends Block implements IGrowable {
     }
 
     @SideOnly(Side.CLIENT)
-    public IIcon getIcon(IBlockAccess p_149673_1_, int p_149673_2_, int p_149673_3_, int p_149673_4_, int p_149673_5_) {
-        if (p_149673_5_ == 1) {
+    public IIcon getIcon(IBlockAccess p_149673_1_, int p_149673_2_, int p_149673_3_, int p_149673_4_, int p_149673_5_)
+    {
+        if (p_149673_5_ == 1)
+        {
             return this.field_149991_b;
-        } else if (p_149673_5_ == 0) {
+        } else if (p_149673_5_ == 0)
+        {
             return DragonBallZBlocks.blockNamekianSoil.getBlockTextureFromSide(p_149673_5_);
-        } else {
+        }
+        else
+        {
             Material material = p_149673_1_.getBlock(p_149673_2_, p_149673_3_ + 1, p_149673_4_).getMaterial();
             return material != Material.snow && material != Material.craftedSnow ? this.blockIcon : this.field_149993_M;
         }
     }
 
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister p_149651_1_) {
+    public void registerBlockIcons(IIconRegister p_149651_1_)
+    {
         this.blockIcon = p_149651_1_.registerIcon(this.getTextureName() + "_side");
         this.field_149991_b = p_149651_1_.registerIcon(this.getTextureName() + "_top");
         this.field_149993_M = p_149651_1_.registerIcon(this.getTextureName() + "_side_snowed");
@@ -117,31 +134,41 @@ public class BlockNamekianGrass extends Block implements IGrowable {
     }
 
 
-    public void func_149853_b(World p_149853_1_, Random p_149853_2_, int p_149853_3_, int p_149853_4_, int p_149853_5_) {
+    public void func_149853_b(World p_149853_1_, Random p_149853_2_, int p_149853_3_, int p_149853_4_, int p_149853_5_)
+    {
         int l = 0;
 
-        while (l < 128) {
+        while (l < 128)
+        {
             int i1 = p_149853_3_;
             int j1 = p_149853_4_ + 1;
             int k1 = p_149853_5_;
             int l1 = 0;
 
-            while (true) {
-                if (l1 < l / 16) {
+            while (true)
+            {
+                if (l1 < l / 16)
+                {
                     i1 += p_149853_2_.nextInt(3) - 1;
                     j1 += (p_149853_2_.nextInt(3) - 1) * p_149853_2_.nextInt(3) / 2;
                     k1 += p_149853_2_.nextInt(3) - 1;
 
-                    if (p_149853_1_.getBlock(i1, j1 - 1, k1) == DragonBallZBlocks.blockNamekianGrass && !p_149853_1_.getBlock(i1, j1, k1).isNormalCube()) {
+                    if (p_149853_1_.getBlock(i1, j1 - 1, k1) == DragonBallZBlocks.blockNamekianGrass && !p_149853_1_.getBlock(i1, j1, k1).isNormalCube())
+                    {
                         ++l1;
                         continue;
                     }
-                } else if (p_149853_1_.getBlock(i1, j1, k1).getMaterial() == Material.air) {
-                    if (p_149853_2_.nextInt(8) != 0) {
-                        if (Blocks.tallgrass.canBlockStay(p_149853_1_, i1, j1, k1)) {
+                } else if (p_149853_1_.getBlock(i1, j1, k1).getMaterial() == Material.air)
+                {
+                    if (p_149853_2_.nextInt(8) != 0)
+                    {
+                        if (Blocks.tallgrass.canBlockStay(p_149853_1_, i1, j1, k1))
+                        {
                             p_149853_1_.setBlock(i1, j1, k1, Blocks.tallgrass, 1, 3);
                         }
-                    } else {
+                    }
+                    else
+                    {
                         p_149853_1_.getBiomeGenForCoords(i1, k1).plantFlower(p_149853_1_, p_149853_2_, i1, j1, k1);
                     }
                 }

@@ -33,6 +33,7 @@ import net.minecraft.command.ServerCommandManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
@@ -92,16 +93,11 @@ public class DragonBallZMod {
         DragonBallZItems.addItems();
         DragonBallZEntitys.addEntitys(this);
 
-        GameRegistry.addRecipe(new ItemStack(DragonBallZBlocks.blockDoomDiamondBlock), "XXX",
-                "XXX",
-                "XXX",
-                'X', DragonBallZItems.itemDoomDiamond);
-
-        GameRegistry.addShapelessRecipe(new ItemStack(DragonBallZItems.itemDoomDiamond, 9), DragonBallZBlocks.blockDoomDiamondBlock);
 
 
         proxy.registerEveryThing();
         proxy.registerCustomBlocks();
+
     }
 
     @EventHandler

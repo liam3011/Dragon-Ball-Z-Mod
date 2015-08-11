@@ -8,8 +8,10 @@ import net.minecraft.item.Item;
 
 import java.util.Random;
 
-public class BlockNamekianCoalOre extends Block {
-    public BlockNamekianCoalOre() {
+public class BlockNamekianCoalOre extends Block
+{
+    public BlockNamekianCoalOre()
+    {
         super(Material.rock);
         this.setHardness(1.3F);
         this.setResistance(10F);
@@ -17,24 +19,31 @@ public class BlockNamekianCoalOre extends Block {
         setBlockTextureName(DragonBallZMod.modid + ":" + "blockNamekianCoalOre");
     }
 
-    public Item getItemDropped(int damage, Random random, int fortune) {
+    public Item getItemDropped(int damage, Random random, int fortune)
+    {
         return Items.coal;
     }
 
-    public int quantityDropped(Random random) {
+    public int quantityDropped(Random random)
+    {
         return 1;
     }
 
-    public int quantityDroppedWithBonus(int fortune, Random random) {
-        if (fortune > 0) {
+    public int quantityDroppedWithBonus(int fortune, Random random)
+    {
+        if (fortune > 0)
+        {
             int j = random.nextInt(fortune + 2) - 1;
 
-            if (j < 0) {
+            if (j < 0)
+            {
                 j = 0;
             }
 
             return quantityDropped(random) * (j + 1);
-        } else {
+        }
+        else
+        {
             return quantityDropped(random);
         }
     }

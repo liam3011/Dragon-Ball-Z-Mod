@@ -15,17 +15,12 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-/**
- * Created by liam on 01/02/2015.
- */
-
 public class itemBattleArmorChest1 extends ItemArmor {
 
     @SideOnly(Side.CLIENT)
     private IIcon[] Icons;
 
-    public itemBattleArmorChest1(ArmorMaterial par2EnumArmorMaterial,
-                                       int par3, int par4) {
+    public itemBattleArmorChest1(ArmorMaterial par2EnumArmorMaterial, int par3, int par4) {
         super(par2EnumArmorMaterial, par3, par4);
 
     }
