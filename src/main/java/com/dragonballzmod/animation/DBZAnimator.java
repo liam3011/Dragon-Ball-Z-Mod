@@ -23,6 +23,7 @@ public class DBZAnimator {
         playerPoses[0] = new Pose("default");
     }
 
+    // Uses bubblesort algorithm
     public static Pose[] sortAnimations(Pose[] poses) {
         for (int i = poses.length - 1; i >= 1; i--) {
             for (int z = 0; z < i; z++) {
@@ -50,6 +51,7 @@ public class DBZAnimator {
         return poses;
     }
 
+    // Uses bubblesort algorithm
     public static PartData[] sortParts(PartData[] parts) {
         for (int i = parts.length - 1; i >= 1; i--) {
             for (int z = 0; z < i; z++) {
@@ -85,6 +87,7 @@ public class DBZAnimator {
         }
     }
 
+    // Uses the quicksearch algorithm
     public static Pose getPose(String animationID, Pose[] poseArray) {
         int first = 0;
         int last = poseArray.length - 1;
@@ -122,6 +125,7 @@ public class DBZAnimator {
         return null;
     }
 
+    // Uses the quicksearch algorithm
     public static PartData getPart(String animationID, PartData[] partArray) {
         if(partArray != null){
             int first = 0;

@@ -93,6 +93,7 @@ public class BlockDragonBall extends BlockContainer {
 
     public void updateTick(World par1World, int x, int y, int z, Random par5Random) {
         ballStage++;
+
         if(ballStage <= 2){
             par1World.addWeatherEffect(new EntityLightningBolt(par1World, x,y,z));
             par1World.scheduleBlockUpdate(x,y,z, this, 40);
