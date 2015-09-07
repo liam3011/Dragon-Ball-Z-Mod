@@ -1,10 +1,8 @@
 package com.dragonballzmod.client;
 
 
-import com.dragonballzmod.blocks.BlockThinTree;
 import com.dragonballzmod.blocks.DragonBallZBlocks;
 import com.dragonballzmod.blocks.itemrenderers.ItemRendererDragonBall;
-import com.dragonballzmod.blocks.itemrenderers.ItemRendererThinTree;
 import com.dragonballzmod.blocks.renderers.TileEntityDragonBallRenderer;
 import com.dragonballzmod.blocks.tileentity.TileEntityDragonBall;
 import com.dragonballzmod.client.gui.GuiChiBar;
@@ -29,6 +27,8 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntityPlayer.class, new RenderDBZPlayer());
         FMLCommonHandler.instance().bus().register(new PlayerRenderTickEvent());
         FMLCommonHandler.instance().bus().register(new PlayerClientTickEvent());
+
+        MinecraftForge.EVENT_BUS.register(new EventHook());
     }
 
     public void registerCustomBlocks()
@@ -42,7 +42,7 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(DragonBallZBlocks.blockDragonBall6), new ItemRendererDragonBall());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(DragonBallZBlocks.blockDragonBall7), new ItemRendererDragonBall());
 
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(DragonBallZBlocks.blockThinTree), new ItemRendererThinTree());
+        //MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(DragonBallZBlocks.blockThinTree), new ItemRendererThinTree());
     }
 
     public void addInGameGUIs()

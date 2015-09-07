@@ -25,7 +25,7 @@ public class DragonBallZItems
         itemDoomDiamond = new ItemDoomDiamond().setUnlocalizedName("itemDoomDiamond");
         itemBattleArmorChest1 = new itemBattleArmorChest1(battleArmorMaterial, 4, 1).setUnlocalizedName("itemBattleArmorChest1");
         itemBattleArmorLegs1 = new itemBattleArmorLegs1(battleArmorMaterial, 4, 1).setUnlocalizedName("itemBattleArmorLegs1");
-        item3011craftChestGi = new Item3011craftChestGi(giArmorMaterial, 4, 1).setUnlocalizedName("item3011craftChestGi");
+        //item3011craftChestGi = new Item3011craftChestGi(giArmorMaterial, 4, 1).setUnlocalizedName("item3011craftChestGi");
 
 
         //Item Registry:
@@ -33,7 +33,7 @@ public class DragonBallZItems
         GameRegistry.registerItem(itemDoomDiamond, "DoomDiamond");
         GameRegistry.registerItem(itemBattleArmorChest1, "Battle Armor Chest Type 1");
         GameRegistry.registerItem(itemBattleArmorLegs1, "Battle Armor Legs Type 1");
-        GameRegistry.registerItem(item3011craftChestGi, "3011craft Chest Gi");
+//        GameRegistry.registerItem(item3011craftChestGi, "3011craft Chest Gi");
     }
 
 }

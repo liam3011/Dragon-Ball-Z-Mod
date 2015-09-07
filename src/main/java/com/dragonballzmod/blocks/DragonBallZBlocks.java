@@ -1,11 +1,7 @@
 package com.dragonballzmod.blocks;
 
-import com.dragonballzmod.DragonBallZMod;
-import com.dragonballzmod.blocks.renderers.TileEntityThinTreeRenderer;
 import com.dragonballzmod.blocks.tileentity.TileEntityThinTree;
 import com.dragonballzmod.help.RegisterHelper;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -14,7 +10,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidRegistry.FluidRegisterEvent;
 
 public class DragonBallZBlocks
 {
@@ -61,8 +56,8 @@ public class DragonBallZBlocks
         //NamekianBlocks
         blockThinTree = new BlockThinTree().setBlockName("blockThinTree");
         blockNamekianWoodPlanks = new BlockNamekianWoodPlanks().setBlockName("blockNamekianWoodPlanks");
-        blockNamekianWoodHalfslab = new BlockNamekianWoodSlab(false, blockNamekianWoodPlanks,  Material.wood).setBlockName("blockNamekianWoodHalfSlab");
-        blockNamekianWoodDoubleslab = new BlockNamekianWoodSlab(true, blockNamekianWoodPlanks, Material.wood).setBlockName("blockNamekianWoodDoubleSlab").setBlockTextureName(DragonBallZMod.modid + ":" + "blockNamekianWoodPlanks");
+        //blockNamekianWoodHalfslab = new BlockNamekianWoodSlab(false, blockNamekianWoodPlanks,  Material.wood).setBlockName("blockNamekianWoodHalfSlab");
+        //blockNamekianWoodDoubleslab = new BlockNamekianWoodSlab(true, blockNamekianWoodPlanks, Material.wood).setBlockName("blockNamekianWoodDoubleSlab").setBlockTextureName(DragonBallZMod.modid + ":" + "blockNamekianWoodPlanks");
         blockNamekianGrass = new BlockNamekianGrass().setBlockName("blockNamekianGrass");
         blockNamekianSand = new BlockNamekianSand().setBlockName("blockNamekianSand");
         blockNamekianSoil = new BlockNamekianSoil().setBlockName("blockNamekianSoil");
@@ -92,8 +87,8 @@ public class DragonBallZBlocks
 
         RegisterHelper.registerBlock(blockThinTree);
         RegisterHelper.registerBlock(blockNamekianWoodPlanks);
-        RegisterHelper.registerBlock(blockNamekianWoodHalfslab);
-        RegisterHelper.registerBlock(blockNamekianWoodDoubleslab);
+        //RegisterHelper.registerBlock(blockNamekianWoodHalfslab);
+        //RegisterHelper.registerBlock(blockNamekianWoodDoubleslab);
         RegisterHelper.registerBlock(blockNamekianGrass);
         RegisterHelper.registerBlock(blockNamekianSand);
         RegisterHelper.registerBlock(blockNamekianSoil);
@@ -110,7 +105,7 @@ public class DragonBallZBlocks
 
         GameRegistry.registerTileEntity(TileEntityThinTree.class, "blockThinTree");
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityThinTree.class, new TileEntityThinTreeRenderer());
+        //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityThinTree.class, new TileEntityThinTreeRenderer());
 
         //Smelting Recipes
         GameRegistry.addSmelting(blockNamekianIronOre, new ItemStack(Items.iron_ingot), 20F);

@@ -35,8 +35,6 @@ public class EntityFlyingNimbus extends Entity {
     @SideOnly(Side.CLIENT)
     private double velocityZ;
 
-    private static final String __OBFID = "CL_00001667";
-
     public EntityFlyingNimbus(World p_i1704_1_) {
         super(p_i1704_1_);
         this.isBoatEmpty = true;
