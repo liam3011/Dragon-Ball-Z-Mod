@@ -7,25 +7,25 @@ import net.minecraft.entity.Entity;
 public class model3011craftChestGi extends ModelDBZBiped
 {
     //fields
-    public ModelRenderer bodyUpper;
-    public ModelRenderer bodyLower;
-    public ModelRenderer frontGiPart;
-    public ModelRenderer backGiPart;
-    public ModelRenderer rightArmUpper;
-    public ModelRenderer rightArmLower;
-    public ModelRenderer leftArmUpper;
-    public ModelRenderer leftArmLower;
-    public ModelRenderer mainBelt;
-    public ModelRenderer beltBuck;
-    public ModelRenderer beltRight;
-    public ModelRenderer beltLeft;
+    ModelRenderer bodyUpper;
+    ModelRenderer bodyLower;
+    ModelRenderer frontGiPart;
+    ModelRenderer backGiPart;
+    ModelRenderer rightArmUpper;
+    ModelRenderer rightArmLower;
+    ModelRenderer leftArmUpper;
+    ModelRenderer leftArmLower;
+    ModelRenderer mainBelt;
+    ModelRenderer beltBuck;
+    ModelRenderer beltRight;
+    ModelRenderer beltLeft;
 
-    public ModelRenderer bodyLockUpper;
-    public ModelRenderer bodyLockLower;
-    public ModelRenderer armLockUpperRight;
-    public ModelRenderer armLockLowerRight;
-    public ModelRenderer armLockUpperLeft;
-    public ModelRenderer armLockLowerLeft;
+    ModelRenderer bodyLockUpper;
+    ModelRenderer bodyLockLower;
+    ModelRenderer armLockUpperRight;
+    ModelRenderer armLockLowerRight;
+    ModelRenderer armLockUpperLeft;
+    ModelRenderer armLockLowerLeft;
 
     public model3011craftChestGi()
     {
@@ -33,7 +33,7 @@ public class model3011craftChestGi extends ModelDBZBiped
         textureHeight = 32;
 
         bodyUpper = new ModelRenderer(this, 0, 0);
-        bodyUpper.addBox(-4F, 0F, -2F, 8, 6, 4, 0.01F);
+        bodyUpper.addBox(-4F, 0F, -2F, 8, 6, 4);
         bodyUpper.setRotationPoint(0F, 0F, 0F);
         bodyUpper.setTextureSize(64, 32);
         bodyUpper.mirror = true;
@@ -105,22 +105,13 @@ public class model3011craftChestGi extends ModelDBZBiped
         beltLeft.mirror = true;
         setRotation(beltLeft, -0.0523599F, 0F, -0.0523599F);
 
-        bodyLockUpper = new ModelRenderer(this, 1, 1);
-        bodyLockUpper.addBox(0F, 0F, 0F, 0, 0, 0);
-        bodyLockUpper.setRotationPoint(0F, 0F, 0F);
+        bodyLockUpper = new ModelRenderer(this);
+        bodyLockUpper.addBox(0, 0, 0, 0, 0, 0);
+        bodyLockUpper.setRotationPoint(0, 0, 0);
 
-        bodyLockLower = new ModelRenderer(this, 1, 1);
-        bodyLockLower.addBox(0F, 0F, 0F, 0, 0, 0);
-        bodyLockLower.setRotationPoint(0F, 0F, 0F);
-
-        armLockUpperLeft = new ModelRenderer(this, 1, 1);
-        armLockUpperLeft.addBox(0F, 0F, 0F, 0, 0, 0);
-        armLockUpperLeft.setRotationPoint(0F, 0F, 0F);
-
-        armLockLowerLeft = new ModelRenderer(this, 1, 1);
-        armLockLowerLeft.addBox(0F, 0F, 0F, 0, 0, 0);
-        armLockLowerLeft.setRotationPoint(0F, 0F, 0F);
-
+        bodyLockLower = new ModelRenderer(this);
+        bodyLockLower.addBox(0, 0, 0, 0, 0, 0);
+        bodyLockLower.setRotationPoint(0, 0, 0);
 
         bodyLockUpper.addChild(bodyUpper);
 
@@ -132,31 +123,22 @@ public class model3011craftChestGi extends ModelDBZBiped
         bodyLockLower.addChild(beltRight);
         bodyLockLower.addChild(beltLeft);
 
-        armLockUpperRight.addChild(rightArmUpper);
-        armLockLowerRight.addChild(rightArmLower);
 
-        armLockUpperLeft.addChild(leftArmUpper);
-        armLockLowerLeft.addChild(leftArmLower);
     }
 
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
+
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 
         renderWithLock(bipedBody, bodyLockUpper, f5);
         renderWithLock(bipedLowerBody, bodyLockLower, f5);
 
-        bipedBody.render(5F);
 
-        renderWithLock(this.bipedRightArmUpper, armLockUpperRight, f5);
-        renderWithLock(this.bipedRightArmLower, armLockLowerRight, f5);
-
-        renderWithLock(this.bipedLeftArmUpper, armLockUpperLeft, f5);
-        renderWithLock(this.bipedLeftArmLower, armLockLowerLeft, f5);
     }
 
-    private void renderWithLock(ModelRenderer bipedBody, ModelRenderer lockblock, float f5)
-    {
+    private void renderWithLock(ModelRenderer bipedBody, ModelRenderer lockblock, float f5) {
+
         setRotation(lockblock, bipedBody.rotateAngleX, bipedBody.rotateAngleY, bipedBody.rotateAngleZ);
 
         lockblock.setRotationPoint(bipedBody.rotationPointX, bipedBody.rotationPointY, bipedBody.rotationPointZ);
@@ -177,5 +159,3 @@ public class model3011craftChestGi extends ModelDBZBiped
     }
 
 }
-
-
